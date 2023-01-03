@@ -72,7 +72,7 @@ export class Base extends Settings {
     }, 1000);
 
     if (!cameraPrivacy) {
-      this.cameraIcon = 'icon-camera';
+      this.cameraIcon = 'videocam';
       this.cameraTooltip = 'Camera Privacy';
       this.showCameraFrame = 'p-3 mb-5';
       // set dimensions to auto and enable frame resize / window resize
@@ -82,7 +82,7 @@ export class Base extends Settings {
       }, 2000);
     } else {
       this.showCameraFrame = 'hide-box';
-      this.cameraIcon = 'icon-camera-off';
+      this.cameraIcon = 'videocam_off';
       this.cameraTooltip = 'Camera Privacy';
       // Apply current dimensions or the frame will be shrunk.
       node.style.width = width;
@@ -259,10 +259,10 @@ export class Base extends Settings {
     // call start
     if (this.phoneOn) {
       callback.call(this);
-      this.phoneIcon = 'icon-phone-off';
+      this.phoneIcon = 'call_end';
       this.phoneOn = false;
-      this.phoneTooltip = 'Leave Conference';
-      this.vcStatus = 'Connecting...';
+      this.phoneTooltip = 'call';
+      // this.vcStatus = 'Connecting...';
       this.connected = true;
       this.chatSubmitButtonLabel = this.chatSubmitButtonLabelTexts[1];
       this.chat.enable();
@@ -282,9 +282,9 @@ export class Base extends Settings {
           console.error('Disconnect Failure');
         });
       this.chatSubmitButtonLabel = this.chatSubmitButtonLabelTexts[0];
-      this.phoneIcon = 'icon-phone';
+      this.phoneIcon = 'call';
       this.phoneOn = true;
-      this.phoneTooltip = 'Join Conference';
+      this.phoneTooltip = 'call-end';
       this.vcStatus = 'Disconnecting...';
       this.connected = false;
       this.participantsList = [];
@@ -311,11 +311,11 @@ export class Base extends Settings {
       })
       .then(function () {
         if (scope.speakerOn) {
-          scope.speakerIcon = 'icon-speaker-off';
+          scope.speakerIcon = 'volume_off';
           scope.speakerOn = false;
           scope.speakerTooltip = 'Speaker Privacy';
         } else {
-          scope.speakerIcon = 'icon-speaker';
+          scope.speakerIcon = 'volume_up';
           scope.speakerOn = true;
           scope.speakerTooltip = 'Speaker Privacy';
         }
