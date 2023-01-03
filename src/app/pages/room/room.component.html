@@ -1,0 +1,296 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- <div [class]="(leftPaneExpanded ? 'expanded' : 'collapsed') + ' col left-panel'">
+      <aside class="text-white bg-dark inner">
+
+        <section class="text-end section-buttons">
+          <button *ngIf="expandIcon" (click)="onSidebarHide()" type="button" class="btn-close btn-close-white"
+            placement="bottom" ngbTooltip="Hide" aria-label="Hide"></button>
+          <button *ngIf="!expandIcon" (click)="onSidebarShow()" type="button" placement="bottom" ngbTooltip="Show"
+            class="bg-dark btn-expand expand-icon" aria-label="Show"></button>
+        </section>
+        <section class="logo">
+          <a (click)="goHome()" ngbTooltip="Home page" aria-label="Home page">
+            <img alt="logo" class="img-fluid logo mx-auto d-block" src="{{img}}/VidyoIO-LogoHorizontal-Dark@2x.png">
+          </a>
+        </section>
+
+        <section class="section-form">
+
+          <form [formGroup]="sideBarForm" novalidate>
+
+            <div class="form-check form-switch">
+              <input class="form-check-input" (click)="showAdvanced() " type="checkbox" id="flexSwitchCheckDefault">
+              <label class="form-check-label" for="flexSwitchCheckDefault" ngbTooltip="Advanced menu"
+                aria-label="Advanced menu">Advanced</label>
+            </div>
+
+            <div class="form-group" *ngFor="let label of sideBarFormLabels; index as i">
+              <div class="row" *ngIf="i<5">
+                <div class="col label">
+                  <label><i class="bi bi-{{sideBarFormIcons[i]}}" placement="bottom" ngbTooltip="{{label}}"></i></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" [formControlName]="controls[i]">
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div *ngIf="advancedContent" class="form-group ">
+              <div class="row">
+                <div class="col label">
+                  <label><i class="bi bi-camera" placement="top" ngbTooltip="{{cameraShareTooltip}}"></i></label>
+                </div>
+                <div class="col">
+                  <select class="form-control" formControlName="cameraShare">
+                    <option [value]="'none'" selected>None</option>
+                    <option [value]="'on'">On</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="advancedContent">
+              <div class="form-group" *ngFor="let label of sideBarFormLabels; index as i">
+                <div class="row" *ngIf="i>4">
+                  <div class="col label">
+                    <label><i class="bi bi-{{sideBarFormIcons[i]}}" placement="top" ngbTooltip="{{label}}"></i></label>
+                  </div>
+                  <div class="col">
+                    <input type="text" class="form-control" [formControlName]="controls[i]">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col label">
+                    <label class="form-check-label" for="ErrorMsgSwitch"><i class="bi bi-exclamation-triangle"
+                        placement="top" ngbTooltip="{{errorMessagesTooltip}}"></i></label>
+                  </div>
+                  <div class="col">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" checked (click)="showErrMessages() " type="checkbox"
+                        id="ErrorMsgSwitch">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col label">
+                    <label class="form-check-label" for="systemMsgSwitch">
+                      <i class="bi bi-card-text" placement="top" ngbTooltip="{{systemMessagesTooltip}}"></i></label>
+                  </div>
+                  <div class="col">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" checked (click)="showSysMessages() " type="checkbox"
+                        id="systemMsgSwitch">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col label">
+                    <label><i class="bi bi-info-square" placement="top" ngbTooltip="{{appVersionTooltip}}"></i></label>
+                  </div>
+                  <div class="col"><label>{{appVersion}}</label></div>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </section>
+      </aside>
+    </div> -->
+
+    <!-- Video area -->
+    <!-- <div class="" *ngIf="participantsList.length == 0">
+
+     </div> -->
+    <div class="col">
+
+      <div class=" {{showCameraFrame}} {{connected ? 'connected' : 'disconnected'}}" id="renderer">
+      </div>
+
+
+
+      <!-- <div
+        class=" {{showCameraFrame}} {{connected ? 'connected' : 'disconnected'}}{{participantsList.length>1? 'participant-list2':''}}"
+        id="renderer">
+      </div> -->
+
+
+
+      <!-- 
+      <div id="volumeMeter" [class]='(volumeMeterIndicator ? "show" : "hidden") + " shadow-sm p-3 mb-5"'></div> -->
+
+      <section id="messages">
+        <span
+          [class]="(showErrorMessage ? '' : 'hide') + ' error-message' + (errorMessage != '' ? 'mr-2' : '')">{{errorMessage}}</span>
+        <span [class]="(showSystemMessage ? '' : 'hide') + ' info-message'">{{message}}</span>
+      </section>
+    </div>
+
+    <div [class]="(rightPaneExpanded ? 'expanded' : 'collapsed') + ' col right-panel'">
+      <aside style="background-color: white;">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+          <li ngbNavItem>
+            <a (click)="onChatTabClick()" class="first position-relative text-center" placement="bottom"
+              ngbTooltip="{{chatTooltip2}}" ngbNavLink><i class="bi bi-chat"></i>
+              <span *ngIf="chatData.numMissedMessages > 0"
+                class="position-absolute translate-middle badge rounded-pill bg-danger">
+                {{chatData.numMissedMessages}}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </a>
+            <ng-template ngbNavContent>
+              <form [formGroup]="chatForm" novalidate>
+                <div class="form-group">
+                  <div id="messageBox">
+
+                    <div class="toast-container">
+                      <div *ngFor="let msg of chatMessages" class="toast show" role="alert" aria-live="assertive"
+                        aria-atomic="true">
+                        <div
+                          [class]="(msg.local ? 'bg-success text-white' : 'bg-light text-black')   + '  toast-header'">
+                          <strong class="me-auto">{{msg.name}}</strong>
+                          <small class="text-muted">{{msg.time}}</small>
+                          <!--
+                                                    <button (click)="hideChatMessage($event)" type="button"
+                                                        class="button-white btn-close" data-bs-dismiss="toast"
+                                                        aria-label="Close"></button>
+                                                    -->
+                        </div>
+                        <div class="toast-body text-message">
+                          {{msg.message }}
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <footer class="user-message-area">
+                    <textarea (keydown)='onChatKeyDown($event, chatForm.value)' rows="5" class="form-control"
+                      aria-label="chat area" formControlName="chat"></textarea>
+                    <button type="submit" (click)="sendMessage(chatForm.value)" [disabled]="!connected"
+                      class="text-center btn submit-button bg-success text-white"><span
+                        [class]="connected ? '': 'grow-animation-small' + ' inline-block'">{{chatSubmitButtonLabel}}</span></button>
+                  </footer>
+                </div>
+              </form>
+            </ng-template>
+          </li>
+          <li ngbNavItem>
+            <a (click)="onParticipantTabClick()" class="second text-truncate text-center" ngbNavLink><i
+                class="bi bi-person-fill" placement="bottom" ngbTooltip="{{participantTooltip}}"></i>
+            </a>
+            <ng-template ngbNavContent>
+              <table *ngIf="participantsList.length > 0" class="participants-list">
+
+                <tr *ngFor="let p of participantsList; index as i">
+                  <td>
+                    <table class="participant-status shadow">
+                      <tr>
+                        <td
+                          [class]=" (p.local ? 'bg-success text-white' : 'another-person') + ' user-initials text-center'"
+                          rowspan="2"><span class="initials shadow">{{getInitials(p.name)}}</span>
+                        </td>
+                        <td class="name bg-light">
+                          <span *ngIf="p.local">You (<i>{{p.name}}</i>)</span>
+                          <span *ngIf="!p.local">{{p.name}}</span>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="icons"><span [class]="'mic-info ' + (p.micOff ? 'toolbar-icon
+                                                        icon-mic-off' :
+                                                        'toolbar-icon icon-mic')"></span>
+
+                          <span
+                            [class]="'camera-info ' + (p.cameraOff ? 'toolbar-icon icon-camera-off' : 'toolbar-icon icon-camera')"></span>
+                          <span class="action-type">{{p.action}}</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              <div class="no-participants-list text-center" *ngIf="participantsList.length == 0"><span class="">Join
+                  Conference</span>
+                <!-- <i class="bi bi-arrow-right icon"></i>-->
+                <button (click)="joinLeave()" type="button" placement="top" ngbTooltip="{{phoneTooltip}}"
+                  [class]="phoneIcon + ' btn-expand  standard-icon grow-animation'"
+                  [attr.aria-label]="phoneTooltip"></button>
+              </div>
+
+              <div
+                [class]="(participantsStatus == '' ? '' : 'show') + ' bg-light text-black participants-list-status toast align-items-center'"
+                role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                  <span class="badge bg-info text-dark">Info</span>
+                  <div class="toast-body">
+                    {{participantsStatus}}
+                  </div>
+
+                  <button (click)="hideLastParticipantStatus()" type="button" class="btn-close me-2 m-auto"
+                    data-bs-dismiss="toast" aria-label="Close"></button>
+
+                </div>
+              </div>
+
+            </ng-template>
+          </li>
+        </ul>
+        <div [ngbNavOutlet]="nav"></div>
+      </aside>
+    </div>
+  </div>
+  <footer id="roomFooter" class="fixed-bottom bg-dark bg-gradient">
+
+    <div class="row bg-dark">
+      <!-- <div class="col-4"></div> -->
+      <div class="col-8">
+        <div class="text-end">
+          <nav class="bg-dark">
+            <button type="button" (click)="toggleCamera()" class="bg-dark btn-expand toolbar-icon padding-circle">
+              <mat-icon class="white-icon ">video_call</mat-icon>
+            </button>
+            <button type="button" (click)="toggleMic()" class="bg-dark btn-expand toolbar-icon padding-circle">
+              <mat-icon class="white-icon">mic</mat-icon>
+            </button>
+            <button type="button" (click)="toggleCamera()" class="bg-dark btn-expand toolbar-icon">
+              <mat-icon class="white-icon">volume_up</mat-icon>
+            </button>
+            <button type="button" (click)="toggleCamera()" class="bg-dark btn-expand toolbar-icon">
+              <mat-icon class="white-icon">screen_share</mat-icon>
+            </button>
+            <button type="button" (click)="joinLeave()" class="bg-dark btn-expand toolbar-icon">
+              <mat-icon class="green-icon">call</mat-icon>
+            </button>
+
+          </nav>
+
+        </div>
+      </div>
+      <div class="col-2 ">
+        <div class="text-end text-white align-items-end status ">
+
+
+
+
+        </div>
+        <button type="button" (click)="toggleChat()" class="bg-dark text-end align-items-end status toolbar-icon">
+          <mat-icon class="white-icon">chat</mat-icon>
+        </button>
+
+        <!-- <div class="text-end text-white align-items-end status ">
+          <div id="connectionStatus text-truncate">{{vcStatus}}</div>
+          <div id="clientVersion text-truncate">v {{vcVersion}}</div>
+        </div> -->
+      </div>
+    </div>
+  </footer>
+  <!-- WCtrlPanel.js needs this DOMNode -->
+  <span id="webrtc_ctrl_panel" class="never-show"></span>
+
+</div>

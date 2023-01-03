@@ -1,0 +1,408 @@
+// Color variables (appears count calculates by raw css)
+@color0: #202020; // Appears 3 times
+
+// Width variables (appears count calculates by raw css)
+@width1: 100%; // Appears 21 times
+
+// Height variables (appears count calculates by raw css)
+@height1: 100%; // Appears 19 times
+@height4: 5px; // Appears 2 times
+
+.vidyo-rendering-container {
+	align-items: stretch;
+	display: grid;
+	grid-gap: 5px;
+	height: @height1;
+	justify-items: stretch;
+	position: relative;
+	width: @width1;
+	.video-grid {
+		grid-area: video;
+		.popup-application {
+			display: none;
+		}
+		.video-wrapper {
+			background: @color0;
+		}
+	}
+	.application-grid {
+		grid-area: application;
+		.video-wrapper {
+			background: black;
+		}
+		.video-placeholder {
+			display: none;
+		}
+		.popup-application {
+			bottom: 60px;
+			height: 50px;
+			left: 60px;
+			position: absolute;
+			width: 50px;
+		}
+	}
+	* {
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	.media-grid {
+		align-items: stretch;
+		display: grid;
+		grid-gap: 5px;
+		height: @height1;
+		justify-items: stretch;
+		user-select: none;
+		width: @width1;
+		.video-container.vidyo-expanded {
+			-moz-transition: bottom 0.5s, right 0.5s, top 0.5s, left 0.5s, font-size 0.5s;
+			-webkit-transition: bottom 0.5s, right 0.5s, top 0.5s, left 0.5s, font-size 0.5s;
+			grid-column-end: unset;
+			grid-row-end: unset;
+			position: absolute;
+			transition: bottom 0.5s, right 0.5s, top 0.5s, left 0.5s, font-size 0.5s;
+			z-index: 99;
+			video {
+				-moz-transition: max-height 0.5s, margin-left 0.5s, margin-top 0.5s;
+				-webkit-transition: max-height 0.5s, margin-left 0.5s, margin-top 0.5s;
+				max-height: none;
+				min-height: @height1;
+				min-width: @width1;
+				transition: max-height 0.5s, margin-left 0.5s, margin-top 0.5s;
+			}
+		}
+		&:empty {
+			display: none;
+		}
+		video {
+			background: transparent;
+		}
+		.video-muted {
+			video {
+				width: @width1;
+				z-index: -1;
+			}
+		}
+		.stats-overlay {
+			bottom: 3em;
+			left: 0;
+			overflow-y: auto;
+			position: absolute;
+			right: 0;
+			top: 0;
+			z-index: 10;
+			ul.statistics-list {
+				list-style-type: none;
+				padding: 0;
+				li.statistics-line {
+					background: white;
+					display: inline;
+					opacity: 0.5;
+					padding: 0.1em;
+					&:after {
+						content: "\a";
+						white-space: pre;
+					}
+					.statistics-key {
+						font-weight: bold;
+					}
+				}
+			}
+		}
+		.stats-overlay.hide {
+			display: none;
+		}
+		.video-display-name-wrapper {
+			height: @height1;
+			position: relative;
+			width: @width1;
+			.video-display-name {
+				background: black;
+				bottom: 0;
+				color: white;
+				font-size: 1.65vw;
+				justify-content: left;
+				left: 0;
+				opacity: 0.25;
+				padding: 3px 3% 12px 3%;
+				position: absolute;
+				width: @width1;
+				word-break: break-all;
+				z-index: 1;
+			}
+			.volume-indicator {
+				bottom: 5px;
+				height: @height4;
+				padding: 0 3%;
+				position: absolute;
+				width: @width1;
+				z-index: 2;
+			}
+		}
+		.video-container {
+			display: inline-flex;
+			flex-direction: column;
+			grid-column-end: span 2;
+			grid-row-end: span 1;
+			justify-content: center;
+			overflow: hidden;
+			position: relative;
+			.video-placeholder {
+				background: @color0;
+				height: @height1;
+				width: @width1;
+			}
+			.video-wrapper {
+				bottom: 0;
+				left: 0;
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+			video {
+				left: 50%;
+				position: absolute;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+		}
+		.video-container.audio-muted {
+			.volume-indicator {
+				display: none;
+			}
+		}
+	}
+	.media-grid.application-grid {
+		.video-container {
+			video {
+				height: @height1;
+				max-height: @height1;
+				max-width: @width1;
+				width: auto;
+			}
+		}
+	}
+	.media-grid.video-grid {
+		.video-container {
+			&:not(.video-muted) {
+				img.video-placeholder {
+					display: none;
+				}
+			}
+			&:not(.displayCropped) {
+				video {
+					height: auto;
+					max-height: @height1;
+					max-width: @width1;
+					object-fit: contain;
+					width: auto;
+				}
+			}
+		}
+		.video-container.local-track {
+			video {
+				transform: translate(-50%, -50%) scaleX(-1);
+			}
+		}
+		.video-container.displayCropped {
+			&:not(.video-muted) {
+				video.video-loading {
+					height: auto;
+					max-height: @height1;
+					max-width: @width1;
+					object-fit: contain;
+					width: auto;
+				}
+			}
+			&:not(.video-muted).aspectRatioTooWide {
+				not(.vidyo-expanded) {
+					video {
+						height: @height1;
+						object-fit: cover;
+						width: auto;
+					}
+				}
+			}
+			&:not(.video-muted).aspectRatioTooHigh {
+				not(.vidyo-expanded) {
+					video {
+						height: auto;
+						object-fit: cover;
+						width: @width1;
+					}
+				}
+			}
+			&:not(.video-muted).aspectRatioInversed {
+				video {
+					height: @height1;
+					margin-left: 0;
+					object-fit: cover;
+					width: auto;
+				}
+			}
+		}
+		.video-container.video-muted {
+			video {
+				height: auto;
+				max-height: @height1;
+				max-width: @width1;
+				object-fit: contain;
+				width: auto;
+			}
+		}
+	}
+	.media-grid.picture-in-picture {
+		grid-gap: 0;
+		grid-template-columns: repeat(5, 1fr);
+		grid-template-rows: repeat(5, 1fr);
+		.video-container.remote-track {
+			grid-column-end: 6;
+			grid-column-start: 1;
+			grid-row-end: 6;
+			grid-row-start: 1;
+		}
+		.video-container.local-track.vidyo-expanded {
+			&:not(.vidyo-expanded-label) {
+				font-size: 0.4em;
+				video {
+					max-height: @height1;
+					object-fit: cover;
+				}
+			}
+		}
+		.video-container.local-track {
+			&:not(.vidyo-expanded) {
+				font-size: 0.4em;
+				grid-column-end: 6;
+				grid-column-start: 5;
+				grid-row-end: 6;
+				grid-row-start: 5;
+				z-index: 2;
+				video {
+					max-height: @height1;
+					width: auto;
+				}
+				.stats-overlay {
+					display: none;
+				}
+			}
+		}
+	}
+}
+.vidyo-rendering-container.defaultWidthIsZero {
+	width: 100vw;
+}
+.vidyo-rendering-container.defaultHeightIsZero {
+	height: 100vh;
+}
+.vidyo-rendering-container-custom {
+	height: @height1;
+	position: relative;
+	width: @width1;
+	.popup-application {
+		display: none;
+	}
+	.video-container {
+		height: @height1;
+		overflow: hidden;
+		position: relative;
+		width: @width1;
+		.video-wrapper-container {
+			height: @height1;
+			width: @width1;
+		}
+		.video-wrapper {
+			background: @color0;
+			height: @height1;
+			width: @width1;
+		}
+		&:not(.video-muted) {
+			img.video-placeholder {
+				display: none;
+			}
+		}
+		video {
+			background: transparent;
+			height: @height1;
+			left: 50%;
+			position: absolute;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			width: @width1;
+		}
+		.video-muted {
+			video {
+				width: @width1;
+				z-index: -1;
+			}
+		}
+		.stats-overlay {
+			bottom: 3em;
+			left: 0;
+			overflow-y: auto;
+			position: absolute;
+			right: 0;
+			top: 0;
+			z-index: 10;
+			ul.statistics-list {
+				list-style-type: none;
+				padding: 0;
+				li.statistics-line {
+					background: white;
+					display: inline;
+					opacity: 0.5;
+					padding: 0.1em;
+					&:after {
+						content: "\a";
+						white-space: pre;
+					}
+					.statistics-key {
+						font-weight: bold;
+					}
+				}
+			}
+		}
+		.stats-overlay.hide {
+			display: none;
+		}
+		.video-display-name-wrapper {
+			.video-display-name {
+				background: black;
+				bottom: 0;
+				color: white;
+				font-size: 1.65vw;
+				justify-content: left;
+				left: 0;
+				opacity: 0.25;
+				padding: 3px 3% 12px 3%;
+				position: absolute;
+				width: @width1;
+				word-break: break-all;
+				z-index: 1;
+			}
+			.volume-indicator {
+				bottom: 5px;
+				height: @height4;
+				padding: 0 3%;
+				position: absolute;
+				width: @width1;
+				z-index: 2;
+			}
+		}
+	}
+	.video-container.displayCropped {
+		video {
+			object-fit: cover;
+		}
+	}
+	&:not(.application-type) {
+		.video-container.local-track {
+			video {
+				transform: translate(-50%, -50%) scaleX(-1);
+			}
+		}
+	}
+}
+.tile-control {
+	display: none !important;
+}

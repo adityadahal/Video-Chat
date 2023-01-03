@@ -1,0 +1,353 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- <div [class]="(leftPaneExpanded ? 'expanded' : 'collapsed') + ' col left-panel'">
+      <aside class="text-white bg-dark inner">
+
+        <section class="text-end section-buttons">
+          <button *ngIf="expandIcon" (click)="onSidebarHide()" type="button" class="btn-close btn-close-white"
+            placement="bottom" ngbTooltip="Hide" aria-label="Hide"></button>
+          <button *ngIf="!expandIcon" (click)="onSidebarShow()" type="button" placement="bottom" ngbTooltip="Show"
+            class="bg-dark btn-expand expand-icon" aria-label="Show"></button>
+        </section>
+        <section class="logo">
+          <a (click)="goHome()" ngbTooltip="Home page" aria-label="Home page">
+            <img alt="logo" class="img-fluid logo mx-auto d-block" src="{{img}}/VidyoIO-LogoHorizontal-Dark@2x.png">
+          </a>
+        </section>
+
+        <section class="section-form">
+
+          <form [formGroup]="sideBarForm" novalidate>
+
+            <div class="form-check form-switch">
+              <input class="form-check-input" (click)="showAdvanced() " type="checkbox" id="flexSwitchCheckDefault">
+              <label class="form-check-label" for="flexSwitchCheckDefault" ngbTooltip="Advanced menu"
+                aria-label="Advanced menu">Advanced</label>
+            </div>
+
+            <div class="form-group" *ngFor="let label of sideBarFormLabels; index as i">
+              <div class="row" *ngIf="i<5">
+                <div class="col label">
+                  <label><i class="bi bi-{{sideBarFormIcons[i]}}" placement="bottom" ngbTooltip="{{label}}"></i></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" [formControlName]="controls[i]">
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div *ngIf="advancedContent" class="form-group ">
+              <div class="row">
+                <div class="col label">
+                  <label><i class="bi bi-camera" placement="top" ngbTooltip="{{cameraShareTooltip}}"></i></label>
+                </div>
+                <div class="col">
+                  <select class="form-control" formControlName="cameraShare">
+                    <option [value]="'none'" selected>None</option>
+                    <option [value]="'on'">On</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="advancedContent">
+              <div class="form-group" *ngFor="let label of sideBarFormLabels; index as i">
+                <div class="row" *ngIf="i>4">
+                  <div class="col label">
+                    <label><i class="bi bi-{{sideBarFormIcons[i]}}" placement="top" ngbTooltip="{{label}}"></i></label>
+                  </div>
+                  <div class="col">
+                    <input type="text" class="form-control" [formControlName]="controls[i]">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col label">
+                    <label class="form-check-label" for="ErrorMsgSwitch"><i class="bi bi-exclamation-triangle"
+                        placement="top" ngbTooltip="{{errorMessagesTooltip}}"></i></label>
+                  </div>
+                  <div class="col">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" checked (click)="showErrMessages() " type="checkbox"
+                        id="ErrorMsgSwitch">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col label">
+                    <label class="form-check-label" for="systemMsgSwitch">
+                      <i class="bi bi-card-text" placement="top" ngbTooltip="{{systemMessagesTooltip}}"></i></label>
+                  </div>
+                  <div class="col">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" checked (click)="showSysMessages() " type="checkbox"
+                        id="systemMsgSwitch">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col label">
+                    <label><i class="bi bi-info-square" placement="top" ngbTooltip="{{appVersionTooltip}}"></i></label>
+                  </div>
+                  <div class="col"><label>{{appVersion}}</label></div>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </section>
+      </aside>
+    </div> -->
+
+    <!-- Video area -->
+    <div class="col">
+
+      <div
+        class="rendererWithoutChat shadow bg-body rounded video-stream {{showCameraFrame}} {{connected ? 'connected' : 'disconnected'}}"
+        id="renderer">
+      </div>
+      <!-- 
+      <div id="volumeMeter" [class]='(volumeMeterIndicator ? "show" : "hidden") + " shadow-sm p-3 mb-5"'></div> -->
+
+      <section id="messages">
+        <span
+          [class]="(showErrorMessage ? '' : 'hide') + ' error-message' + (errorMessage != '' ? 'mr-2' : '')">{{errorMessage}}</span>
+        <span [class]="(showSystemMessage ? '' : 'hide') + ' info-message'">{{message}}</span>
+      </section>
+    </div>
+
+    <div [class]="(rightPaneExpanded ? 'expanded' : 'collapsed') + ' col right-panel'">
+      <aside>
+        <ul ngbNav #nav="ngbNav" class="nav-tabs">
+          <li ngbNavItem>
+            <a (click)="onChatTabClick()" class="first position-relative text-center" placement="bottom"
+              ngbTooltip="{{chatTooltip2}}" ngbNavLink><i class="bi bi-chat"></i>
+              <span *ngIf="chatData.numMissedMessages > 0"
+                class="position-absolute translate-middle badge rounded-pill bg-danger">
+                {{chatData.numMissedMessages}}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </a>
+            <ng-template ngbNavContent>
+              <form [formGroup]="chatForm" novalidate>
+                <div class="form-group">
+                  <div id="messageBox">
+
+                    <div class="toast-container">
+                      <div *ngFor="let msg of chatMessages" class="toast show" role="alert" aria-live="assertive"
+                        aria-atomic="true">
+                        <div
+                          [class]="(msg.local ? 'bg-success text-white' : 'bg-light text-black')   + '  toast-header'">
+                          <strong class="me-auto">{{msg.name}}</strong>
+                          <small class="text-muted">{{msg.time}}</small>
+                          <!--
+                                                    <button (click)="hideChatMessage($event)" type="button"
+                                                        class="button-white btn-close" data-bs-dismiss="toast"
+                                                        aria-label="Close"></button>
+                                                    -->
+                        </div>
+                        <div class="toast-body text-message">
+                          {{msg.message }}
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <footer class="user-message-area">
+                    <textarea (keydown)='onChatKeyDown($event, chatForm.value)' rows="5" class="form-control"
+                      aria-label="chat area" formControlName="chat"></textarea>
+                    <button type="submit" (click)="sendMessage(chatForm.value)" [disabled]="!connected"
+                      class="text-center btn submit-button bg-success text-white"><span
+                        [class]="connected ? '': 'grow-animation-small' + ' inline-block'">{{chatSubmitButtonLabel}}</span></button>
+                  </footer>
+                </div>
+              </form>
+            </ng-template>
+          </li>
+          <li ngbNavItem>
+            <a (click)="onParticipantTabClick()" class="second text-truncate text-center" ngbNavLink><i
+                class="bi bi-person-fill" placement="bottom" ngbTooltip="{{participantTooltip}}"></i>
+            </a>
+            <ng-template ngbNavContent>
+              <table *ngIf="participantsList.length > 0" class="participants-list">
+
+                <tr *ngFor="let p of participantsList; index as i">
+                  <td>
+                    <table class="participant-status shadow">
+                      <tr>
+                        <td
+                          [class]=" (p.local ? 'bg-success text-white' : 'another-person') + ' user-initials text-center'"
+                          rowspan="2"><span class="initials shadow">{{getInitials(p.name)}}</span>
+                        </td>
+                        <td class="name bg-light">
+                          <span *ngIf="p.local">You (<i>{{p.name}}</i>)</span>
+                          <span *ngIf="!p.local">{{p.name}}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="icons"><span [class]="'mic-info ' + (p.micOff ? 'toolbar-icon
+                                                        icon-mic-off' :
+                                                        'toolbar-icon icon-mic')"></span>
+
+                          <span
+                            [class]="'camera-info ' + (p.cameraOff ? 'toolbar-icon icon-camera-off' : 'toolbar-icon icon-camera')"></span>
+                          <span class="action-type">{{p.action}}</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              <div class="no-participants-list text-center" *ngIf="participantsList.length == 0"><span class="">Join
+                  Conference</span>
+                <!-- <i class="bi bi-arrow-right icon"></i>-->
+                <button (click)="joinLeave()" type="button" placement="top" ngbTooltip="{{phoneTooltip}}"
+                  [class]="phoneIcon + ' btn-expand  standard-icon grow-animation'"
+                  [attr.aria-label]="phoneTooltip"></button>
+              </div>
+
+              <div
+                [class]="(participantsStatus == '' ? '' : 'show') + ' bg-light text-black participants-list-status toast align-items-center'"
+                role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                  <span class="badge bg-info text-dark">Info</span>
+                  <div class="toast-body">
+                    {{participantsStatus}}
+                  </div>
+
+                  <button (click)="hideLastParticipantStatus()" type="button" class="btn-close me-2 m-auto"
+                    data-bs-dismiss="toast" aria-label="Close"></button>
+
+                </div>
+              </div>
+
+            </ng-template>
+          </li>
+        </ul>
+        <div [ngbNavOutlet]="nav"></div>
+      </aside>
+    </div>
+  </div>
+  <footer id="roomFooter" class="fixed-bottom bg-dark bg-gradient">
+    <div class="row">
+      <!-- <div class="col-2"></div> -->
+      <div class="col-10">
+        <div class="text-end">
+          <nav class="bg-dark">
+            <div id="webcasting" title="Webcasting" class="toolbarButton"></div>
+            <div id="recorder" title="Record Status" class="toolbarButton"></div>
+
+            <button (click)="toggleCamera()" type="button" placement="top" ngbTooltip="{{cameraTooltip}}"
+              [class]="cameraIcon + ' bg-dark btn-expand toolbar-icon drop-down-select'"
+              [attr.aria-label]="cameraTooltip"></button>
+
+            <div class="btn-group dropup drop-down-select-button" placement="top" ngbTooltip="{{cameraTooltipOptions}}">
+              <button type=" button" class="btn-expand toolbar-icon btn dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false" [attr.aria-label]="cameraTooltipOptions">
+              </button>
+              <ul class="dropdown-menu shadow-small ">
+                <li>
+                  <form [formGroup]="bottomPanelCamera" novalidate>
+                    <select (change)="onCameraChange($event)" class="form-control form-select" formControlName="camera">
+                      <option *ngFor="let device of videoDevices" [value]="device.value"
+                        [attr.selected]='device!.selected ? "selected" : null'>
+                        {{device.label}}
+                      </option>
+                    </select>
+                  </form>
+                </li>
+              </ul>
+            </div>
+
+            <button (click)="toggleMic()" type="button" placement="top" ngbTooltip="{{micTooltip}}"
+              [class]="micIcon + '  btn-expand toolbar-icon drop-down-select'" [attr.aria-label]="micTooltip"></button>
+
+            <div class="btn-group dropup drop-down-select-button" placement="top" ngbTooltip="{{micTooltipOptions}}">
+              <button type="button" class=" btn-expand toolbar-icon btn dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false" [attr.aria-label]="micTooltipOptions">
+              </button>
+              <ul class="dropdown-menu shadow-small ">
+                <li>
+                  <form [formGroup]="bottomPanelMic" novalidate>
+                    <select (change)="onMicChange($event)" class="form-control form-select" formControlName="mic">
+                      <option *ngFor="let device of micDevices" [value]="device.value"
+                        [attr.selected]='device!.selected ? "selected" : null'>
+                        {{device.label}}
+                      </option>
+                    </select>
+                  </form>
+                </li>
+              </ul>
+            </div>
+
+
+            <button (click)="toggleSpeaker()" type="button" placement="top" ngbTooltip="{{speakerTooltip}}"
+              [class]="speakerIcon + ' btn-expand toolbar-icon drop-down-select'"
+              [attr.aria-label]="speakerTooltip"></button>
+
+            <div class="btn-group dropup drop-down-select-button" placement="top"
+              ngbTooltip="{{speakerTooltipOptions}}">
+              <button type="button" class="btn-expand toolbar-icon btn dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false" [attr.aria-label]="speakerTooltipOptions">
+              </button>
+              <ul class="dropdown-menu shadow-small ">
+                <li>
+                  <form [formGroup]="bottomPanelSpeaker" novalidate>
+                    <select (change)="onSpeakerChange($event)" class="form-control form-select"
+                      formControlName="speaker">
+                      <option *ngFor="let device of speakerDevices" [value]="device.value"
+                        [attr.selected]='device!.selected ? "selected" : null'>
+                        {{device.label}}
+                      </option>
+                    </select>
+                  </form>
+                </li>
+              </ul>
+            </div>
+            <div class="separator"></div>
+
+            <button (click)="joinLeave()" type="button" placement="top" ngbTooltip="{{phoneTooltip}}"
+              [class]="phoneIcon + ' btn-expand  toolbar-icon'" [attr.aria-label]="phoneTooltip"></button>
+
+            <button (click)="onShare()" type="button" placement="top" ngbTooltip="{{shareTooltip}}"
+              class="btn-expand share-button toolbar-icon" [attr.aria-label]="shareTooltip">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-projector" viewBox="0 0 16 16">
+                <path
+                  d="M14 7.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM2.5 6a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4Zm0 2a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4Z" />
+                <path fill-rule="evenodd"
+                  d="M0 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2 1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1H5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1 2 2 0 0 1-2-2V6Zm2-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+              </svg>
+            </button>
+
+
+
+
+            <button (click)="toggleChat()" type="button" placement="top" ngbTooltip="{{chatTooltip}}"
+              [class]="chatIcon + ' btn-expand toolbar-icon position-relative chat-button'"
+              [attr.aria-label]="chatTooltip" [style]="chatData.numMissedMessages == 0 ? '' : 'top:-29px' ">
+              <span *ngIf="chatData.numMissedMessages > 0"
+                class="position-absolute translate-middle badge rounded-pill bg-danger">
+                {{chatData.numMissedMessages}}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </button>
+          </nav>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="text-end text-white align-items-end status">
+          <div id="connectionStatus text-truncate">{{vcStatus}}</div>
+          <div id="clientVersion text-truncate">v {{vcVersion}}</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- WCtrlPanel.js needs this DOMNode -->
+  <span id="webrtc_ctrl_panel" class="never-show"></span>
+
+</div>
