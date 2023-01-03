@@ -248,24 +248,38 @@
   <footer id="roomFooter" class="fixed-bottom bg-dark bg-gradient">
 
     <div class="row bg-dark">
-      <!-- <div class="col-4"></div> -->
+
+      <!-- <div class="col-1">
+       
+      </div> -->
       <div class="col-8">
         <div class="text-end">
           <nav class="bg-dark">
-            <button type="button" (click)="toggleCamera()" class="bg-dark btn-expand toolbar-icon padding-circle">
-              <mat-icon class="white-icon ">video_call</mat-icon>
+            <button mat-mini-fab type="button" (click)="toggleCamera()" color="primary"
+              class="mat-background btn-expand toolbar-icon " [ngStyle]="{transform: 'scale(0.7)'
+              }">
+              <mat-icon class="white-icon ">{{cameraIcon}}</mat-icon>
             </button>
-            <button type="button" (click)="toggleMic()" class="bg-dark btn-expand toolbar-icon padding-circle">
+            <button mat-mini-fab type="button" (click)="toggleMic()" class=" btn-expand mat-background toolbar-icon"
+              [ngStyle]="{transform: 'scale(0.7)'
+              }">
               <mat-icon class="white-icon">mic</mat-icon>
             </button>
-            <button type="button" (click)="toggleCamera()" class="bg-dark btn-expand toolbar-icon">
-              <mat-icon class="white-icon">volume_up</mat-icon>
+            <button mat-mini-fab type="button" (click)="toggleSpeaker()" class="mat-background btn-expand toolbar-icon"
+              [ngStyle]="{transform: 'scale(0.7)'
+              }">
+              <mat-icon class="white-icon">{{speakerIcon}}</mat-icon>
             </button>
-            <button type="button" (click)="toggleCamera()" class="bg-dark btn-expand toolbar-icon">
+            <button mat-mini-fab type="button" (click)="onShare()" class="mat-background btn-expand toolbar-icon"
+              [ngStyle]="{transform: 'scale(0.7)'
+              }">
               <mat-icon class="white-icon">screen_share</mat-icon>
             </button>
-            <button type="button" (click)="joinLeave()" class="bg-dark btn-expand toolbar-icon">
-              <mat-icon class="green-icon">call</mat-icon>
+            <button mat-mini-fab type="button" (click)="joinLeave()"
+              [class]="phoneIcon == 'call'?  'green-icon btn-expand toolbar-icon': 'red-icon btn-expand toolbar-icon'"
+              [ngStyle]="{transform: 'scale(0.7)'
+              }">
+              <mat-icon [class]="phoneIcon == 'call'? 'green-icon': 'red-icon'">{{phoneIcon}}</mat-icon>
             </button>
 
           </nav>
@@ -279,14 +293,14 @@
 
 
         </div>
-        <button type="button" (click)="toggleChat()" class="bg-dark text-end align-items-end status toolbar-icon">
+        <button type="button" (click)="toggleChat()" class="bg-dark text-end align-items-end status toolbar-icon-left">
           <mat-icon class="white-icon">chat</mat-icon>
         </button>
 
-        <!-- <div class="text-end text-white align-items-end status ">
-          <div id="connectionStatus text-truncate">{{vcStatus}}</div>
-          <div id="clientVersion text-truncate">v {{vcVersion}}</div>
-        </div> -->
+        <div class="text-end text-white align-items-end status ">
+          <!-- <div id="connectionStatus text-truncate">{{vcStatus}}</div> -->
+          <!-- <div id="clientVersion text-truncate">v {{vcVersion}}</div> -->
+        </div>
       </div>
     </div>
   </footer>
