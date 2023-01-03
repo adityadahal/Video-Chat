@@ -4,13 +4,10 @@ import { MainComponent } from './pages/main/main.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { RoomComponent } from './pages/room/room.component';
 
-const routes: Routes = [
-  { path: '', component: MainComponent },
-  { path: 'room', component: RoomComponent },
-  { path: '**', component: NotFoundComponent },];
+const routes: Routes = [{ path: '', component: RoomComponent }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { useHash: false })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
