@@ -69,7 +69,7 @@ export class Settings {
   skipInitMedia: boolean = true;
   init: boolean = true;
 
-  cameraIcon: string = 'icon-camera';
+  cameraIcon: string = 'videocam';
   cameraIconOff: string = 'icon-camera-off';
   cameraTooltip: string = 'Camera Privacy';
   cameraTooltipOptions: string = 'Select Camera';
@@ -80,13 +80,13 @@ export class Settings {
   phoneTooltip: string = 'Join Conference';
 
   micOn: boolean = true;
-  micIcon: string = 'icon-mic';
+  micIcon: string = 'mic';
   micIconOff: string = 'icon-mic-off';
   micTooltip: string = 'Microphone Privacy';
   micTooltipOptions: string = 'Select Microphone';
 
   speakerOn: boolean = true;
-  speakerIcon: string = 'icon-speaker';
+  speakerIcon: string = 'volume_up';
   speakerIConOff: string = 'icon-speaker-off';
   speakerTooltip: string = 'Speaker Privacy';
   speakerTooltipOptions = 'Select Speaker';
