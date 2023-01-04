@@ -161,6 +161,10 @@
                         </div>
                       </div>
                     </div>
+
+
+
+
                     <!-- <div *ngFor="let msg of chatMessages" class="toast-body text-message  text-black">
                       <strong class="me-auto toast-header">{{msg.name}}</strong>
                       <small class="toast-body  text-message  text-black"> {{msg.message }}</small>
@@ -265,28 +269,13 @@
       <!-- <div class="col-1">
        
       </div> -->
-      <div class="col-8">
-        <div class="text-end">
-          <nav class="bg-dark">
+      <div class="col-12">
+        <div class="text-center">
+          <nav class=" bg-dark">
             <button mat-mini-fab type="button" (click)="toggleCamera()" color="primary"
               class="mat-background btn-expand toolbar-icon " [ngStyle]="{transform: 'scale(0.7)'
               }">
               <mat-icon class="white-icon ">{{cameraIcon}}</mat-icon>
-            </button>
-            <button mat-mini-fab type="button" (click)="toggleMic()" class=" btn-expand mat-background toolbar-icon"
-              [ngStyle]="{transform: 'scale(0.7)'
-              }">
-              <mat-icon class="white-icon">mic</mat-icon>
-            </button>
-            <button mat-mini-fab type="button" (click)="toggleSpeaker()" class="mat-background btn-expand toolbar-icon"
-              [ngStyle]="{transform: 'scale(0.7)'
-              }">
-              <mat-icon class="white-icon">{{speakerIcon}}</mat-icon>
-            </button>
-            <button mat-mini-fab type="button" (click)="onShare()" class="mat-background btn-expand toolbar-icon"
-              [ngStyle]="{transform: 'scale(0.7)'
-              }">
-              <mat-icon class="white-icon">screen_share</mat-icon>
             </button>
             <button mat-mini-fab type="button" (click)="joinLeave()"
               [class]="phoneIcon == 'call'?  'green-icon btn-expand toolbar-icon': 'red-icon btn-expand toolbar-icon'"
@@ -294,25 +283,50 @@
               }">
               <mat-icon [class]="phoneIcon == 'call'? 'green-icon': 'red-icon'">{{phoneIcon}}</mat-icon>
             </button>
+            <button mat-mini-fab type="button" (click)="toggleMic()" class=" btn-expand mat-background toolbar-icon"
+              [ngStyle]="{transform: 'scale(0.7)'
+              }">
+              <mat-icon class="white-icon">mic</mat-icon>
+            </button>
+
+
 
           </nav>
 
         </div>
       </div>
-      <div class="col-2 ">
-        <div class="text-end text-white align-items-end status ">
+      <div class="col-4 ">
+        <div class=" text-white align-items-end status  ">
+          <button type="button" (click)="toggleChat()" class="bg-dark toolbar-icon-end ">
+            <mat-icon class="white-icon">chat</mat-icon>
+          </button>
+          <button type="button" (click)="onShare()" class="bg-dark toolbar-icon-end">
+            <mat-icon class="white-icon">screen_share</mat-icon>
+          </button>
+          <button type="button" (click)="toggleSpeaker()" class="bg-dark toolbar-icon-end">
+            <mat-icon class="white-icon">{{speakerIcon}}</mat-icon>
+          </button>
 
 
 
 
         </div>
-        <button type="button" (click)="toggleChat()" class="bg-dark text-end align-items-end status toolbar-icon-left">
+        <!-- <button type="button" (click)="toggleChat()" class="bg-dark text-end align-items-end status toolbar-icon-left">
           <mat-icon class="white-icon">chat</mat-icon>
         </button>
+        <button mat-mini-fab type="button" (click)="toggleSpeaker()" class="mat-background btn-expand toolbar-icon"
+          [ngStyle]="{transform: 'scale(0.7)'
+              }">
+          <mat-icon class="white-icon">{{speakerIcon}}</mat-icon>
+        </button>
+        <button mat-mini-fab type="button" (click)="onShare()" class="mat-background btn-expand toolbar-icon" [ngStyle]="{transform: 'scale(0.7)'
+              }">
+          <mat-icon class="white-icon">screen_share</mat-icon>
+        </button> -->
 
         <div class="text-end text-white align-items-end status ">
-          <!-- <div id="connectionStatus text-truncate">{{vcStatus}}</div> -->
-          <!-- <div id="clientVersion text-truncate">v {{vcVersion}}</div> -->
+          <!-- <div id="connectionStatus text-truncate">{{vcStatus}}</div>
+          <div id="clientVersion text-truncate">v {{vcVersion}}</div> -->
         </div>
       </div>
     </div>
