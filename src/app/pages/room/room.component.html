@@ -152,29 +152,42 @@
                       <div *ngFor="let msg of chatMessages" class="toast show" role="alert" aria-live="assertive"
                         aria-atomic="true">
                         <div
-                          [class]="(msg.local ? 'bg-success text-white' : 'bg-light text-black')   + '  toast-header'">
+                          [class]="(msg.local ? 'bg-primary text-white' : 'bg-info text-white')   + '  toast-header'">
                           <strong class="me-auto">{{msg.name}}</strong>
                           <small class="text-muted">{{msg.time}}</small>
-                          <!--
-                                                    <button (click)="hideChatMessage($event)" type="button"
-                                                        class="button-white btn-close" data-bs-dismiss="toast"
-                                                        aria-label="Close"></button>
-                                                    -->
                         </div>
-                        <div class="toast-body text-message">
+                        <div *ngFor="let msg of chatMessages" class="toast-body text-message bg-light text-black">
                           {{msg.message }}
                         </div>
                       </div>
                     </div>
+                    <!-- <div *ngFor="let msg of chatMessages" class="toast-body text-message  text-black">
+                      <strong class="me-auto toast-header">{{msg.name}}</strong>
+                      <small class="toast-body  text-message  text-black"> {{msg.message }}</small>
+
+
+                    </div> -->
 
 
                   </div>
-                  <footer class="user-message-area">
-                    <textarea (keydown)='onChatKeyDown($event, chatForm.value)' rows="5" class="form-control"
-                      aria-label="chat area" formControlName="chat"></textarea>
-                    <button type="submit" (click)="sendMessage(chatForm.value)" [disabled]="!connected"
-                      class="text-center btn submit-button bg-success text-white"><span
-                        [class]="connected ? '': 'grow-animation-small' + ' inline-block'">{{chatSubmitButtonLabel}}</span></button>
+                  <footer class="user-message-area" style="padding: 6px 14px 14px 6px;">
+
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <mat-icon class="blue-icon ml-auto " (click)="sendMessage(chatForm.value)"
+                          style="cursor: pointer; padding-top:10px ;">send
+                        </mat-icon>
+                        <!-- <button type="submit" (click)="sendMessage(chatForm.value)" [disabled]="!connected"
+                          class="text-center btn btn-primary text-white"><span
+                            [class]="connected ? '': 'grow-animation-small' + ' inline-block'">
+                            <mat-icon class="white-icon " (click)="sendMessage(chatForm.value)">send</mat-icon>
+                          </span></button> -->
+                      </div>
+                      <input (keydown)='onChatKeyDown($event, chatForm.value)' rows="5" class="form-control"
+                        aria-label="chat area" formControlName="chat">
+                    </div>
+
+
                   </footer>
                 </div>
               </form>
