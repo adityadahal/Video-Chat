@@ -409,10 +409,17 @@ div.right-panel footer textarea {
  z-index: -2;
 }
 
+::ng-deep #renderer .video-container.local-track.newExpand  video {
+
+ max-height: 80%;
+ width: 100%;
+
+}
+
 ::ng-deep #renderer.connected .video-container.local-track video {
   max-height: 30vh;
   position: absolute;
-  bottom: 56px;
+  bottom: 0;
   left: 0;
   width: 20%;
   z-index: 9;
@@ -439,32 +446,6 @@ div.right-panel footer textarea {
  
 }
 
-// @media screen and (max-width: 1000px) {
-//   ::ng-deep #renderer .video-container.local-track video {
-//   margin-top: 5rem;
-//   height: 100%;
-//   width: 100%;
- 
-// }
-// }
-
-// @media screen and (max-width: 400px) {
-//   ::ng-deep #renderer .video-container.local-track video {
-//   margin-top: 10rem;
-//   height: 100%;
-//   width: 100%;
- 
-// }
-// }
-
-// ::ng-deep #renderer .video-container.remote-track video .participant-list2 {
-//   max-height: 10vh;
- 
-// }
-// ::ng-deep #renderer.connected .video-container.local-track video .participant-list2 {
-//   max-height: 30vh;
-  
-// }
 
 ::ng-deep #renderer .video-container.remote-track {
   height: 100%;
