@@ -399,14 +399,15 @@ div.right-panel footer textarea {
 }
 
 ::ng-deep #renderer .video-container.local-track video {
- margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
- max-height: 80%;
- width: 100%;
- z-index: -2;
+//  margin: 0;
+//   position: absolute;
+//   top: 50%;
+//   -ms-transform: translateY(-50%);
+//   transform: translateY(-50%);
+ max-height: 100%;
+ max-width: 100%;
+ height: 100vh;
+//  z-index: -2;
 }
 
 ::ng-deep #renderer .video-container.local-track.newExpand  video {
@@ -419,7 +420,7 @@ div.right-panel footer textarea {
 ::ng-deep #renderer.connected .video-container.local-track video {
   max-height: 30vh;
   position: absolute;
-  bottom: 0;
+  bottom: 56px;
   left: 0;
   width: 20%;
   z-index: 9;
