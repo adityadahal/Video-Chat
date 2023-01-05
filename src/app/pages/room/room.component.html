@@ -298,7 +298,12 @@
       <div class="col-4 ">
         <div class=" text-white align-items-end status  ">
           <button type="button" (click)="toggleChat()" class="bg-dark toolbar-icon-end ">
-            <mat-icon class="white-icon">chat</mat-icon>
+            <mat-icon class="white-icon">chat </mat-icon>
+            <span *ngIf="chatData.numMissedMessages > 0"
+              class="position-absolute translate-middle badge rounded-pill bg-danger">
+              {{chatData.numMissedMessages}}
+              <span class="visually-hidden">unread messages</span>
+            </span>
           </button>
           <button type="button" (click)="onShare()" class="bg-dark toolbar-icon-end">
             <mat-icon class="white-icon">screen_share</mat-icon>
