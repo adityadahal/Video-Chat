@@ -165,6 +165,9 @@
 
 
 
+
+
+
                     <!-- <div *ngFor="let msg of chatMessages" class="toast-body text-message  text-black">
                       <strong class="me-auto toast-header">{{msg.name}}</strong>
                       <small class="toast-body  text-message  text-black"> {{msg.message }}</small>
@@ -295,22 +298,40 @@
 
         </div>
       </div>
-      <div class="col-4 ">
+      <div class="col-6 ">
         <div class=" text-white align-items-end status  ">
-          <button type="button" (click)="toggleChat()" class="bg-dark toolbar-icon-end ">
-            <mat-icon class="white-icon">chat </mat-icon>
-            <span *ngIf="chatData.numMissedMessages > 0"
-              class="position-absolute translate-middle badge rounded-pill bg-danger">
-              {{chatData.numMissedMessages}}
-              <span class="visually-hidden">unread messages</span>
-            </span>
-          </button>
-          <button type="button" (click)="onShare()" class="bg-dark toolbar-icon-end">
+          <div class="dropup">
+            <button class="bg-dark toolbar-icon-end  " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <mat-icon class="white-icon">more_vert</mat-icon>
+
+            </button>
+            <div class="dropdown-menu bg-dark" style="text-decoration: none !important;">
+              <button class="dropdown-item" (click)="onShare()">
+                <mat-icon class="white-icon">screen_share</mat-icon>
+              </button>
+              <button class="dropdown-item" (click)="onShare()">
+                <mat-icon class="white-icon">settings</mat-icon>
+              </button>
+
+
+              <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+            </div>
+            <button type="button" (click)="toggleChat()" class="bg-dark toolbar-icon-end ">
+              <mat-icon class="white-icon">chat </mat-icon>
+              <span *ngIf="chatData.numMissedMessages > 0"
+                class="position-absolute translate-middle badge rounded-pill bg-danger">
+                {{chatData.numMissedMessages}}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </button>
+          </div>
+          <!-- <button type="button" (click)="onShare()" class="bg-dark toolbar-icon-end">
             <mat-icon class="white-icon">screen_share</mat-icon>
-          </button>
-          <button type="button" (click)="toggleSpeaker()" class="bg-dark toolbar-icon-end">
+          </button> -->
+          <!-- <button type="button" (click)="toggleSpeaker()" class="bg-dark toolbar-icon-end">
             <mat-icon class="white-icon">{{speakerIcon}}</mat-icon>
-          </button>
+          </button> -->
 
 
 
