@@ -1,5 +1,6 @@
 <div class="container-fluid">
   <div class="row">
+
     <!-- <div [class]="(leftPaneExpanded ? 'expanded' : 'collapsed') + ' col left-panel'">
       <aside class="text-white bg-dark inner">
 
@@ -140,7 +141,7 @@
     </div> -->
 
     <div [class]="(rightPaneExpanded ? 'expanded' : 'collapsed') + ' col right-panel'">
-      <aside *ngIf="chatTabClicked" style="background-color: white;">
+      <aside style="background-color: white;">
         <ul ngbNav #nav="ngbNav" class="nav-tabs">
           <li ngbNavItem>
             <a (click)="onChatTabClick()" class="first position-relative text-center" placement="bottom"
@@ -157,8 +158,10 @@
                   <div id="messageBox">
 
                     <div class="toast-container">
+
                       <div *ngFor="let msg of chatMessages" class="toast show" role="alert" aria-live="assertive"
                         aria-atomic="true">
+
                         <div
                           [class]="(msg.local ? 'bg-primary text-white' : 'bg-info text-white')   + '  toast-header'">
                           <strong class="me-auto">{{msg.name}}</strong>
@@ -177,11 +180,6 @@
                         <mat-icon class="blue-icon ml-auto " (click)="sendMessage(chatForm.value)"
                           style="cursor: pointer; padding-top:10px ;">send
                         </mat-icon>
-                        <!-- <button type="submit" (click)="sendMessage(chatForm.value)" [disabled]="!connected"
-                          class="text-center btn btn-primary text-white"><span
-                            [class]="connected ? '': 'grow-animation-small' + ' inline-block'">
-                            <mat-icon class="white-icon " (click)="sendMessage(chatForm.value)">send</mat-icon>
-                          </span></button> -->
                       </div>
                       <input (keydown)='onChatKeyDown($event, chatForm.value)' rows="5" class="form-control"
                         aria-label="chat area" formControlName="chat">
@@ -209,6 +207,7 @@
                           rowspan="2"><span class="initials shadow">{{getInitials(p.name)}}</span>
                         </td>
                         <td class="name bg-light">
+
                           <span *ngIf="p.local">You (<i>{{p.name}}</i>)</span>
                           <span *ngIf="!p.local">{{p.name}}</span>
 
@@ -228,6 +227,7 @@
                   </td>
                 </tr>
               </table>
+
               <div class="no-participants-list text-center" *ngIf="participantsList.length == 0"><span class="">Join
                   Conference</span>
                 <!-- <i class="bi bi-arrow-right icon"></i>-->
@@ -257,46 +257,6 @@
         <div [ngbNavOutlet]="nav"></div>
       </aside>
 
-      <aside *ngIf="rightPanelFormExpanded" style="background-color: white;">
-        <ng-template ngbNavContent>
-          <form [formGroup]="chatForm" novalidate>
-            <div class="form-group">
-              <div id="messageBox">
-                <p class="text-white">Hello</p>
-
-                <div class="toast-container">
-                  <div *ngFor="let msg of chatMessages" class="toast show" role="alert" aria-live="assertive"
-                    aria-atomic="true">
-                    <div [class]="(msg.local ? 'bg-primary text-white' : 'bg-info text-white')   + '  toast-header'">
-                      <strong class="me-auto">{{msg.name}}</strong>
-                      <small class="text-muted">{{msg.time}}</small>
-                    </div>
-                    <div *ngFor="let msg of chatMessages" class="toast-body text-message bg-light text-black">
-                      {{msg.message }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <footer class="user-message-area" style="padding: 6px 14px 14px 6px;">
-
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <mat-icon class="blue-icon ml-auto " (click)="sendMessage(chatForm.value)"
-                      style="cursor: pointer; padding-top:10px ;">send
-                    </mat-icon>
-                  </div>
-                  <input (keydown)='onChatKeyDown($event, chatForm.value)' rows="5" class="form-control"
-                    aria-label="chat area" formControlName="chat">
-                </div>
-
-
-              </footer>
-            </div>
-          </form>
-        </ng-template>
-        <!-- <div [ngbNavOutlet]="nav"></div> -->
-
-      </aside>
     </div>
   </div>
   <footer id="roomFooter" class="fixed-bottom bg-dark bg-gradient">
