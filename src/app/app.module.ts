@@ -11,19 +11,27 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { RoomComponent } from './pages/room/room.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClientComponent } from './client/client.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, NotFoundComponent, RoomComponent, ClientComponent],
+  declarations: [
+    AppComponent,
+    MainComponent,
+    NotFoundComponent,
+    RoomComponent,
+    ClientComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
     MatIconModule,
+    MatTabsModule,
     MatButtonModule,
     BrowserAnimationsModule,
   ],
