@@ -294,36 +294,19 @@
       </div>
       <div class="col-6 ">
         <div class=" text-white align-items-end status  ">
-          <div class="dropup">
-            <button class="bg-dark toolbar-icon-end  " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              <mat-icon class="white-icon">more_vert</mat-icon>
+          <button type="button" (click)="onShare()" class="bg-dark toolbar-icon-end ">
+            <mat-icon class="white-icon">screen_share </mat-icon>
 
-            </button>
-            <div class="dropdown-menu bg-light" style="text-decoration: none !important;">
-              <button class="dropdown-item" (click)="onShare()">
-                <mat-icon class="">screen_share</mat-icon>
-              </button>
-              <button class="dropdown-item" (click)="onShare()">
-                <mat-icon class="">settings</mat-icon>
-              </button>
-              <button class="dropdown-item" (click)="toggleForm()">
-                <mat-icon class="">assignment</mat-icon>
-              </button>
+          </button>
+          <button type="button" (click)="toggleChat()" class="bg-dark toolbar-icon-end ">
+            <mat-icon class="white-icon">chat </mat-icon>
+            <span *ngIf="chatData.numMissedMessages > 0"
+              class="position-absolute translate-middle badge rounded-pill bg-danger">
+              {{chatData.numMissedMessages}}
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          </button>
 
-
-
-              <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-            </div>
-            <button type="button" (click)="toggleChat()" class="bg-dark toolbar-icon-end ">
-              <mat-icon class="white-icon">chat </mat-icon>
-              <span *ngIf="chatData.numMissedMessages > 0"
-                class="position-absolute translate-middle badge rounded-pill bg-danger">
-                {{chatData.numMissedMessages}}
-                <span class="visually-hidden">unread messages</span>
-              </span>
-            </button>
-          </div>
           <!-- <button type="button" (click)="onShare()" class="bg-dark toolbar-icon-end">
             <mat-icon class="white-icon">screen_share</mat-icon>
           </button> -->
