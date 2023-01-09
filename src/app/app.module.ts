@@ -12,6 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { RoomComponent } from './pages/room/room.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,6 +35,8 @@ import { ClientComponent } from './client/client.component';
     MatIconModule,
     MatTabsModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     BrowserAnimationsModule,
   ],
   providers: [],

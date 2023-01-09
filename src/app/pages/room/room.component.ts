@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LokiImplementation } from './loki-implementation';
@@ -11,7 +11,12 @@ declare var VidyoClientLib: any;
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.less'],
 })
-export class RoomComponent extends VidyoConnector implements OnInit {
+export class RoomComponent
+  extends VidyoConnector
+  implements OnInit, AfterViewInit
+{
+  @ViewChild('nav') nav: any;
+
   VCLib = VidyoClientLib;
 
   constructor(public router: Router) {
@@ -59,6 +64,17 @@ export class RoomComponent extends VidyoConnector implements OnInit {
     });
 
     this.initVC();
+  }
+
+  ngAfterViewInit(): void {
+    // this.nav.nativeElement.addEventListener('click', alert('lkjldkf'));
+  }
+
+  switchTab(active: number) {
+    this.rightPaneExpanded = !this.rightPaneExpanded;
+    this.nav.select(active);
+
+    console.log(this.nav);
   }
 
   /**

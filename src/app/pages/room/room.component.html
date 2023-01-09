@@ -132,18 +132,12 @@
       </section>
     </div>
 
-    <!-- <div [class]="(rightPanelFormExpanded ? 'expanded' : 'collapsed') + ' col right-panel'">
-      <aside style="background-color: white;">
 
-
-      </aside>
-
-    </div> -->
 
     <div [class]="(rightPaneExpanded ? 'expanded' : 'collapsed') + ' col right-panel'">
       <aside style="background-color: white;">
         <ul ngbNav #nav="ngbNav" class="nav-tabs">
-          <li ngbNavItem>
+          <li *ngIf="nav.activeId == 1" [ngbNavItem]="1">
             <a (click)="onChatTabClick()" class="first position-relative text-center" placement="bottom"
               ngbTooltip="{{chatTooltip2}}" ngbNavLink><i class="bi bi-chat"></i>
               <span *ngIf="chatData.numMissedMessages > 0"
@@ -191,7 +185,7 @@
               </form>
             </ng-template>
           </li>
-          <li ngbNavItem>
+          <li *ngIf="nav.activeId == 2" [ngbNavItem]="2">
             <a (click)="onParticipantTabClick()" class="second text-truncate text-center" ngbNavLink><i
                 class="bi bi-person-fill" placement="bottom" ngbTooltip="{{participantTooltip}}"></i>
             </a>
@@ -253,12 +247,55 @@
 
             </ng-template>
           </li>
+          <li *ngIf="nav.activeId == 3" [ngbNavItem]="3">
+            <a (click)="onChatTabClick()" class="first position-relative text-center" placement="bottom"
+              ngbTooltip="{{chatTooltip2}}" ngbNavLink>Text
+            </a>
+            <ng-template ngbNavContent>
+              <form [formGroup]="chatForm" novalidate>
+                <div class="form-group">
+                  <div id="messageBox">
+
+                    <div class="toast-container text-center"
+                      style="pointer-events: all; margin-left: auto; margin-right: auto;">
+                      <h2>General Form</h2>
+
+                      <mat-form-field appearance="outline" [style.width.px]=250>
+                        <mat-label>Account Number</mat-label>
+                        <input matInput>
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" [style.width.px]=250>
+                        <mat-label>Full Name</mat-label>
+                        <input matInput>
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" [style.width.px]=250>
+                        <mat-label>Address</mat-label>
+                        <input matInput>
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" [style.width.px]=250>
+                        <mat-label>Email</mat-label>
+                        <input matInput>
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" [style.width.px]=250>
+                        <mat-label>Phone</mat-label>
+                        <input matInput>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <footer class="user-message-area" style="padding: 6px 14px 14px 6px; ">
+                    <button mat-raised-button color="primary" style="width: 100%;">Save</button>
+                  </footer>
+                </div>
+              </form>
+            </ng-template>
+          </li>
         </ul>
         <div [ngbNavOutlet]="nav"></div>
       </aside>
 
     </div>
   </div>
+
   <footer id="roomFooter" class="fixed-bottom bg-dark bg-gradient">
 
     <div class="row bg-dark">
@@ -307,7 +344,7 @@
               <button class="dropdown-item" (click)="onShare()">
                 <mat-icon class="">settings</mat-icon>
               </button>
-              <button class="dropdown-item" (click)="toggleForm()">
+              <button class="dropdown-item" (click)="switchTab(3)">
                 <mat-icon class="">assignment</mat-icon>
               </button>
 
