@@ -341,8 +341,8 @@
               <button class="dropdown-item" (click)="onShare()">
                 <mat-icon class="">screen_share</mat-icon>
               </button>
-              <button class="dropdown-item" (click)="onShare()">
-                <mat-icon class="">settings</mat-icon>
+              <button class="dropdown-item" (click)="switchTab(2)">
+                <mat-icon class="">person_filled</mat-icon>
               </button>
               <button class="dropdown-item" (click)="switchTab(3)">
                 <mat-icon class="">assignment</mat-icon>
@@ -352,7 +352,7 @@
 
               <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
             </div>
-            <button type="button" (click)="toggleChat()" class="bg-dark toolbar-icon-end ">
+            <button type="button" (click)="switchTab(1)" class="bg-dark toolbar-icon-end ">
               <mat-icon class="white-icon">chat </mat-icon>
               <span *ngIf="chatData.numMissedMessages > 0"
                 class="position-absolute translate-middle badge rounded-pill bg-danger">
