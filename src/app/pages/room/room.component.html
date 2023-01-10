@@ -110,7 +110,11 @@
      </div> -->
     <div class="col">
 
-      <div class=" {{showCameraFrame}} {{connected ? 'connected' : 'disconnected'}}  " id="renderer">
+      <div #screen class=" {{showCameraFrame}} {{connected ? 'connected' : 'disconnected'}}  " id="renderer">
+      </div>
+      <div id="download" style="display: none;">
+        <img #canvas [src]=" canvas">
+        <a #downloadLink></a>
       </div>
 
 
@@ -138,7 +142,7 @@
       <aside style="background-color: white;">
         <ul ngbNav #nav="ngbNav" class="nav-tabs">
           <li *ngIf="nav.activeId == 1" [ngbNavItem]="1">
-            <a (click)="onChatTabClick()" class="first position-relative text-center" placement="bottom"
+            <a (click)="onChatTabClick()" class="first position-relative" placement="bottom"
               ngbTooltip="{{chatTooltip2}}" ngbNavLink><i class="bi bi-chat"></i>
               <span *ngIf="chatData.numMissedMessages > 0"
                 class="position-absolute translate-middle badge rounded-pill bg-danger">
@@ -248,9 +252,6 @@
             </ng-template>
           </li>
           <li *ngIf="nav.activeId == 3" [ngbNavItem]="3">
-            <a (click)="onChatTabClick()" class="first position-relative text-center" placement="bottom"
-              ngbTooltip="{{chatTooltip2}}" ngbNavLink>Text
-            </a>
             <ng-template ngbNavContent>
               <form [formGroup]="chatForm" novalidate>
                 <div class="form-group">
@@ -284,6 +285,41 @@
                   </div>
                   <footer class="user-message-area" style="padding: 6px 14px 14px 6px; ">
                     <button mat-raised-button color="primary" style="width: 100%;">Save</button>
+                  </footer>
+                </div>
+              </form>
+            </ng-template>
+          </li>
+          <li *ngIf="nav.activeId == 4" [ngbNavItem]="4">
+            <!-- <a (click)="onChatTabClick()" class="first position-relative text-center" placement="bottom"
+              ngbTooltip="{{chatTooltip2}}" ngbNavLink style="width: 100%;">Text
+            </a> -->
+            <ng-template ngbNavContent>
+              <form [formGroup]="chatForm" novalidate>
+                <div class="form-group">
+                  <div id="messageBox">
+
+                    <div class="toast-container text-center"
+                      style="pointer-events: all; margin-left: auto; margin-right: auto;">
+                      <h2>Image Capture</h2>
+
+                      <mat-form-field appearance="fill">
+                        <mat-label>Image Type</mat-label>
+                        <mat-select>
+                          <mat-option value="citizenship">CitizenShip</mat-option>
+                          <mat-option value="passport">Passport</mat-option>
+                          <mat-option value="image">Image</mat-option>
+                          <mat-option value="signature">Signature</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <button mat-raised-button color="primary" style="width: 90%;" (click)="captureShot()">Capture
+                        Image</button>
+                      <img #canvas [src]="screen" alt="">
+                    </div>
+
+                  </div>
+                  <footer class="user-message-area" style="padding: 6px 14px 14px 6px; ">
+
                   </footer>
                 </div>
               </form>
@@ -346,6 +382,9 @@
               </button>
               <button class="dropdown-item" (click)="switchTab(3)">
                 <mat-icon class="">assignment</mat-icon>
+              </button>
+              <button class="dropdown-item" (click)="switchTab(4)">
+                <mat-icon class="">photo_camera</mat-icon>
               </button>
 
 

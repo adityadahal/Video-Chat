@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LokiImplementation } from './loki-implementation';
@@ -16,6 +22,9 @@ export class RoomComponent
   implements OnInit, AfterViewInit
 {
   @ViewChild('nav') nav: any;
+  @ViewChild('screen') screen: ElementRef;
+  @ViewChild('canvas') canvas: ElementRef<any>;
+  @ViewChild('downloadLink') downloadLink: ElementRef;
 
   VCLib = VidyoClientLib;
 
@@ -239,5 +248,21 @@ export class RoomComponent
       .catch(function (err: any) {
         console.error('CreateVidyoConnector Failed ' + err);
       });
+  }
+  captureShot() {
+    console.log('clicked');
+    let video: any = document.getElementsByTagName('video')[0];
+
+    let canvas = document.createElement('canvas');
+
+    canvas.width = 500;
+    canvas.height = 300;
+
+    let ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 200, 40, 350, 200, 0, 0, 500, 300);
+
+    this.downloadLink.nativeElement.href = canvas.toDataURL('image/jpeg');
+    this.downloadLink.nativeElement.download = 'citizenship.jpeg';
+    this.downloadLink.nativeElement.click();
   }
 }
