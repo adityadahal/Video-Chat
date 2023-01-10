@@ -142,20 +142,21 @@
       <aside style="background-color: white;">
         <ul ngbNav #nav="ngbNav" class="nav-tabs">
           <li *ngIf="nav.activeId == 1" [ngbNavItem]="1">
-            <a (click)="onChatTabClick()" class="first position-relative" placement="bottom"
+            <!-- <a (click)="onChatTabClick()" class="first position-relative" placement="bottom"
               ngbTooltip="{{chatTooltip2}}" ngbNavLink><i class="bi bi-chat"></i>
               <span *ngIf="chatData.numMissedMessages > 0"
                 class="position-absolute translate-middle badge rounded-pill bg-danger">
                 {{chatData.numMissedMessages}}
                 <span class="visually-hidden">unread messages</span>
               </span>
-            </a>
+            </a> -->
             <ng-template ngbNavContent>
               <form [formGroup]="chatForm" novalidate>
                 <div class="form-group">
                   <div id="messageBox">
 
                     <div class="toast-container">
+                      <h2>Messages</h2>
 
                       <div *ngFor="let msg of chatMessages" class="toast show" role="alert" aria-live="assertive"
                         aria-atomic="true">
@@ -325,6 +326,9 @@
               </form>
             </ng-template>
           </li>
+          <button class="dropdown-item" (click)="closerightPanel()" style="text-align: end;">
+            <mat-icon class="red-icon-cross">cancel</mat-icon>
+          </button>
         </ul>
         <div [ngbNavOutlet]="nav"></div>
       </aside>
@@ -389,7 +393,6 @@
 
 
 
-              <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
             </div>
             <button type="button" (click)="switchTab(1)" class="bg-dark toolbar-icon-end ">
               <mat-icon class="white-icon">chat </mat-icon>
