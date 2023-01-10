@@ -27,6 +27,7 @@ export class RoomComponent
   @ViewChild('downloadLink') downloadLink: ElementRef;
 
   VCLib = VidyoClientLib;
+  selectedvalue: string = '';
 
   constructor(public router: Router) {
     super();
@@ -80,10 +81,14 @@ export class RoomComponent
   }
 
   switchTab(active: number) {
-    this.rightPaneExpanded = !this.rightPaneExpanded;
+    this.rightPaneExpanded = true;
     this.nav.select(active);
 
     console.log(this.nav);
+  }
+
+  closerightPanel() {
+    this.rightPaneExpanded = false;
   }
 
   /**
@@ -249,20 +254,34 @@ export class RoomComponent
         console.error('CreateVidyoConnector Failed ' + err);
       });
   }
+  onImageChange(event: any) {
+    // console.log(event);
+
+    this.selectedvalue = event.value;
+    console.log(this.selectedvalue);
+  }
   captureShot() {
     console.log('clicked');
     let video: any = document.getElementsByTagName('video')[0];
 
     let canvas = document.createElement('canvas');
 
-    canvas.width = 500;
-    canvas.height = 300;
+    // canvas.width = 500;
+    // canvas.height = 300;
 
+    canvas.height = 350;
+    canvas.width = 250;
     let ctx = canvas.getContext('2d');
     ctx.drawImage(video, 200, 40, 350, 200, 0, 0, 500, 300);
 
     this.downloadLink.nativeElement.href = canvas.toDataURL('image/jpeg');
     this.downloadLink.nativeElement.download = 'citizenship.jpeg';
     this.downloadLink.nativeElement.click();
+    document.getElementById('output').appendChild(canvas);
+  }
+
+  DeleteImage() {
+    var gfg_down = document.getElementById('output');
+    gfg_down.parentNode.removeChild(gfg_down);
   }
 }

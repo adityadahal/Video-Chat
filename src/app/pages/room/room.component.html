@@ -306,7 +306,7 @@
 
                       <mat-form-field appearance="fill">
                         <mat-label>Image Type</mat-label>
-                        <mat-select>
+                        <mat-select (selectionChange)="onImageChange($event)">
                           <mat-option value="citizenship">CitizenShip</mat-option>
                           <mat-option value="passport">Passport</mat-option>
                           <mat-option value="image">Image</mat-option>
@@ -315,11 +315,24 @@
                       </mat-form-field>
                       <button mat-raised-button color="primary" style="width: 90%;" (click)="captureShot()">Capture
                         Image</button>
-                      <img #canvas [src]="screen" alt="">
+
+
+                      <p class="text-center">Image Type: <span
+                          class="text-strong h5 text-center">{{selectedvalue}}</span></p>
+                      <div id="output" class='text-center' style="height: 150px; width: 140px;">
+
+                      </div>
+
+
+
                     </div>
 
                   </div>
-                  <footer class="user-message-area" style="padding: 6px 14px 14px 6px; ">
+                  <footer *ngIf="selectedvalue != ''" class="user-message-area" style="padding: 6px 14px 14px 6px; ">
+                    <button (click)="DeleteImage()" type="button" mat-raised-button color="warn"
+                      style="width: 100%;">Delete</button>
+
+
 
                   </footer>
                 </div>
@@ -347,8 +360,7 @@
         <div class="text-center">
           <nav class=" bg-dark">
             <button mat-mini-fab type="button" (click)="toggleCamera()" color="primary"
-              class="mat-background btn-expand toolbar-icon " [ngStyle]="{transform: 'scale(0.7)'
-              }">
+              class="mat-background btn-expand toolbar-icon " [ngStyle]="{transform: ' scale(0.7)' }">
               <mat-icon class="white-icon ">{{cameraIcon}}</mat-icon>
             </button>
             <button mat-mini-fab type="button" (click)="joinLeave()"
