@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { MainComponent } from './pages/main/main.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { MatCardModule } from '@angular/material/card';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -40,6 +41,7 @@ import { ClientComponent } from './client/client.component';
     MatInputModule,
     MatSelectModule,
     BrowserAnimationsModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
