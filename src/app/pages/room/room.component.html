@@ -108,14 +108,15 @@
     <!-- <div class="" *ngIf="participantsList.length == 0">
 
      </div> -->
+    <div id="download" style="display: none;">
+      <img #canvas [src]=" canvas">
+      <a #downloadLink></a>
+    </div>
     <div class="col">
 
       <div #screen class=" {{showCameraFrame}} {{connected ? 'connected' : 'disconnected'}}  " id="renderer">
       </div>
-      <!-- <div id="download" style="display: none;">
-        <img #canvas [src]=" canvas">
-        <a #downloadLink></a>
-      </div> -->
+
 
 
 
@@ -284,6 +285,7 @@
               </form>
             </ng-template>
           </li>
+
           <li *ngIf="nav.activeId == 4" [ngbNavItem]="4">
             <!-- <a (click)="onChatTabClick()" class="first position-relative text-center" placement="bottom"
               ngbTooltip="{{chatTooltip2}}" ngbNavLink style="width: 100%;">Text
@@ -332,9 +334,77 @@
               </form>
             </ng-template>
           </li>
-          <button class="dropdown-item" (click)="closerightPanel()" style="text-align: end;">
-            <mat-icon class="red-icon-cross">cancel</mat-icon>
-          </button>
+          <li *ngIf="nav.activeId == 5" [ngbNavItem]="5">
+            <ng-template ngbNavContent>
+              <form [formGroup]="chatForm" novalidate>
+                <div class="form-group">
+                  <div id="messageBox">
+
+                    <div class="toast-container"
+                      style="pointer-events: all; margin-left: auto; margin-right: auto; justify-content: center;">
+                      <mat-card class="example-card">
+                        <mat-card-header>
+                          <div mat-card-avatar class="example-header-image"></div>
+                          <mat-card-title>Meeting Summary</mat-card-title>
+
+                        </mat-card-header>
+
+                        <mat-card-content>
+                          <p>98989898989898</p>
+                          <p class="text-muted">Meeting Id</p>
+                          <p>
+                            Aditya Dahal
+                          </p>
+                          <p class="text-muted">client</p>
+                        </mat-card-content>
+                        <mat-card-content>
+                          <p>
+                            Name Here
+                          </p>
+                          <p class="text-muted">Agent</p>
+                          <div class="row">
+                            <div class="col">
+                              <p>Connected</p>
+                              <p class="text-muted">status</p>
+                            </div>
+                            <div class="col">
+                              <p>27.33.17.12</p>
+                              <p class="text-muted">Ip Address</p>
+
+                            </div>
+
+                          </div>
+                        </mat-card-content>
+
+                      </mat-card>
+
+
+
+
+
+
+                    </div>
+
+                  </div>
+                  <footer *ngIf="selectedvalue != ''" class="user-message-area" style="padding: 6px 14px 14px 6px; ">
+
+
+
+
+                  </footer>
+                </div>
+              </form>
+            </ng-template>
+          </li>
+          <li style="margin-left: auto;">
+            <button class="dropdown-item btn btn-secondary" (click)="closerightPanel()">
+              <mat-icon class="red-icon-cross">cancel</mat-icon>
+            </button>
+          </li>
+
+
+
+
         </ul>
         <div [ngbNavOutlet]="nav"></div>
       </aside>
@@ -386,6 +456,9 @@
               </button>
               <button class="dropdown-item" (click)="switchTab(2)">
                 <mat-icon class="">person_filled</mat-icon>
+              </button>
+              <button class="dropdown-item" (click)="switchTab(5)">
+                <mat-icon class="">groups_3</mat-icon>
               </button>
               <button class="dropdown-item" (click)="switchTab(3)">
                 <mat-icon class="">assignment</mat-icon>
