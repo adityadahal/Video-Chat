@@ -149,8 +149,8 @@
                 <div class="form-group">
                   <div id="messageBox">
 
-                    <div class="toast-container">
-                      <h2>Messages</h2>
+                    <div class="toast-container text-center" style="margin-left: auto; margin-right: auto;">
+                      <h2 class="text-center">Messages</h2>
 
                       <div *ngFor="let msg of chatMessages" class="toast show" role="alert" aria-live="assertive"
                         aria-atomic="true">
@@ -355,7 +355,7 @@
                           <p>
                             Aditya Dahal
                           </p>
-                          <p class="text-muted">client</p>
+                          <p class="text-muted">Client</p>
                         </mat-card-content>
                         <mat-card-content>
                           <p>
@@ -365,26 +365,16 @@
                           <div class="row">
                             <div class="col">
                               <p>Connected</p>
-                              <p class="text-muted">status</p>
+                              <p class="text-muted">Status</p>
                             </div>
                             <div class="col">
                               <p>27.33.17.12</p>
                               <p class="text-muted">Ip Address</p>
-
                             </div>
-
                           </div>
                         </mat-card-content>
-
                       </mat-card>
-
-
-
-
-
-
                     </div>
-
                   </div>
                   <footer *ngIf="selectedvalue != ''" class="user-message-area" style="padding: 6px 14px 14px 6px; ">
 
