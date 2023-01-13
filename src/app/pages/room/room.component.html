@@ -1,5 +1,19 @@
 <div class="container-fluid">
-  <div *ngIf="selectedvalue != ''" #screen class="citizenship"></div>
+  <div
+    *ngIf="selectedvalue != ''"
+    #screen
+    [class]="
+      selectedvalue == 'citizenship'
+        ? 'citizenship'
+        : selectedvalue === 'passport'
+        ? 'passport'
+        : selectedvalue === 'image'
+        ? 'image'
+        : selectedvalue == 'signature'
+        ? 'signature'
+        : ''
+    "
+  ></div>
   <div class="row">
     <!-- <div [class]="(leftPaneExpanded ? 'expanded' : 'collapsed') + ' col left-panel'">
       <aside class="text-white bg-dark inner">

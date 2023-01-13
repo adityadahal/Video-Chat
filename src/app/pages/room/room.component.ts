@@ -90,6 +90,7 @@ export class RoomComponent
 
   closerightPanel() {
     this.rightPaneExpanded = false;
+    this.selectedvalue = '';
   }
 
   /**
