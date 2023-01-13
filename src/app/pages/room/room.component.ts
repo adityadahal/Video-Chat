@@ -83,8 +83,9 @@ export class RoomComponent
   switchTab(active: number) {
     this.rightPaneExpanded = true;
     this.nav.select(active);
-
-    console.log(this.nav);
+    // this.nav.activeId == active
+    //   ? (this.rightPaneExpanded = true)
+    //   : (this.rightPaneExpanded = false);
   }
 
   closerightPanel() {
@@ -283,5 +284,11 @@ export class RoomComponent
   DeleteImage() {
     var gfg_down = document.getElementById('output');
     gfg_down.parentNode.removeChild(gfg_down);
+  }
+
+  async onRecord() {
+    const mediaDevices = navigator.mediaDevices as any;
+    const stream = await mediaDevices.getDisplayMedia();
+    console.log(stream);
   }
 }
