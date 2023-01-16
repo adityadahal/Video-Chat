@@ -1,4 +1,4 @@
-import { Base } from './base';
+import { Base } from '../pages/room/base';
 
 export class Chat extends Base {
   constructor() {
@@ -173,9 +173,7 @@ export class Chat extends Base {
    * It serves for unread messages gfx notification
    */
   onParticipantTabClick(): void {
-    // this.rightPaneExpanded = !this.rightPaneExpanded;
     this.chatData.chatOpen = false;
-    console.log(this.chatData);
   }
   /**
    * Optional feature - turned off now, needs update

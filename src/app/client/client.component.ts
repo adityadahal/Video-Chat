@@ -1,43 +1,20 @@
-import {
-  AfterViewInit,
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LokiImplementation } from './loki-implementation';
-import { VidyoConnector } from './vidyo-connector';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LokiImplementation } from '../pages/room/loki-implementation';
+import { VidyoConnector } from '../pages/room/vidyo-connector';
 
 declare var VidyoClientLib: any;
 
 @Component({
-  selector: 'app-room',
-  templateUrl: './room.component.html',
-  styleUrls: ['./room.component.less'],
+  selector: 'app-client',
+  templateUrl: './client.component.html',
+  styleUrls: ['./client.component.less'],
 })
-export class RoomComponent
-  extends VidyoConnector
-  implements OnInit, AfterViewInit
-{
-  @ViewChild('nav') nav: any;
-  @ViewChild('screen') screen: ElementRef;
-  @ViewChild('canvas') canvas: ElementRef<any>;
-  @ViewChild('downloadLink') downloadLink: ElementRef;
-
+export class ClientComponent extends VidyoConnector implements OnInit {
   VCLib = VidyoClientLib;
-  selectedvalue: string = '';
-  image: any = '';
-  imageCaptured: boolean = false;
-  imageVerify: boolean = false;
 
-  constructor(
-    public router: Router,
-    config: NgbModalConfig,
-    private modalService: NgbModal
-  ) {
+  constructor(public router: Router) {
     super();
     this.rtr = router;
 
@@ -82,23 +59,6 @@ export class RoomComponent
     });
 
     this.initVC();
-  }
-
-  ngAfterViewInit(): void {
-    // this.nav.nativeElement.addEventListener('click', alert('lkjldkf'));
-  }
-
-  switchTab(active: number) {
-    this.rightPaneExpanded = true;
-    this.nav.select(active);
-    // this.nav.activeId == active
-    //   ? (this.rightPaneExpanded = true)
-    //   : (this.rightPaneExpanded = false);
-  }
-
-  closerightPanel() {
-    this.rightPaneExpanded = false;
-    this.selectedvalue = '';
   }
 
   /**
@@ -263,56 +223,5 @@ export class RoomComponent
       .catch(function (err: any) {
         console.error('CreateVidyoConnector Failed ' + err);
       });
-  }
-  onImageChange(event: any) {
-    // console.log(event);
-
-    this.selectedvalue = event.value;
-    console.log(this.selectedvalue);
-  }
-  captureShot() {
-    this.imageCaptured = true;
-    let video: any = document.getElementsByTagName('video')[0];
-
-    let canvas = document.createElement('canvas');
-
-    canvas.width = 450;
-    canvas.height = 300;
-
-    // canvas.height = 350;
-    // canvas.width = 250;
-    let ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 400, 200, 350, 200, 0, 0, 500, 300);
-
-    this.downloadLink.nativeElement.href = canvas.toDataURL('image/jpeg');
-    this.downloadLink.nativeElement.download = 'citizenship.jpeg';
-    // this.downloadLink.nativeElement.click();
-
-    // document.getElementById('output').appendChild(canvas);
-    this.image = canvas.toDataURL('image/jpeg');
-    console.log(this.image);
-  }
-
-  DeleteImage() {
-    this.imageVerify = false;
-  }
-
-  async onRecord() {
-    const mediaDevices = navigator.mediaDevices as any;
-    const stream = await mediaDevices.getDisplayMedia();
-    console.log(stream);
-  }
-  open(content) {
-    this.modalService.open(content);
-    this.captureShot();
-    this.selectedvalue = '';
-  }
-  imageRetake() {
-    this.selectedvalue = 'citizenship';
-    this.modalService.dismissAll();
-  }
-  verifyImage() {
-    this.imageVerify = true;
-    this.modalService.dismissAll();
   }
 }

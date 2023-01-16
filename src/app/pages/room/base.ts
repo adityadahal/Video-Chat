@@ -143,6 +143,12 @@ export class Base extends Settings {
       this.chatTooltip = 'Show chat';
       this.rightPaneExpanded = false;
     }
+    this.chatTabClicked = !this.chatTabClicked;
+  }
+
+  toggleForm() {
+    this.rightPaneExpanded = !this.rightPaneExpanded;
+    this.rightPanelFormExpanded = !this.rightPanelFormExpanded;
   }
 
   /**

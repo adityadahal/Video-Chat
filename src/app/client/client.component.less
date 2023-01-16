@@ -10,11 +10,7 @@
 }
 
 .left-panel.expanded {
-  max-width: 30rem;
-}
-
-.left-panel.expanded .expanded-more {
-  max-width: 5rem;
+  max-width: 25rem;
 }
 
 .left-panel.expanded .logo {
@@ -104,10 +100,6 @@
 .white-icon{
   color: white;
 
-}
-
-.red-icon1{
-  color: red;
 }
 
 .green-icon{
@@ -300,11 +292,6 @@
   border-radius: 0;
 }
 
-//// Mat Field Form
-
-
-
-
 .nav-tabs .first {
   color: white;
   width: 100%;
@@ -322,19 +309,13 @@
 div.right-panel.expanded {
   max-width: 20rem;
   overflow: hidden;
-  margin-top: 1.7rem;
   transition: max-width 600ms ease-out;
-}
-
-div.right-panel.expanded.max-width{
-  max-width: 30rem;
-
 }
 div.right-panel.collapsed {
   height: 100vh;
   max-width: 0;
   overflow: hidden;
-  // transition: max-width 600ms ease-in;
+  transition: max-width 600ms ease-in;
 }
 
 div.right-panel.collapsed aside {
@@ -351,13 +332,8 @@ div.right-panel.expanded aside {
 div.right-panel #messageBox {
   max-height: 75vh;
   height: 100vh;
-  overflow-y: hidden;
-  width: 100%;
-  // margin: 1rem 0;
-}
-
-.red-icon-cross{
-  color: red;
+  overflow-y: auto;
+  margin: 1rem 0;
 }
 
 div.right-panel footer {
@@ -401,8 +377,6 @@ div.right-panel footer textarea {
 ::ng-deep .video-wrapper video {
   width: 100%;
 }
-
-
 
 ::ng-deep #renderer .video-overlay .video-control-views-wrapper,
 ::ng-deep #renderer .video-overlay .video-tile-controls,
@@ -703,78 +677,6 @@ div.right-panel footer textarea {
   }
 }
 
-   .citizenship {
-    position: absolute;
-    border: solid rgb(255, 255, 0) 10px;
-  top: 200px;
-    left: 380px;
-    opacity: 0.1;
-    cursor: pointer;
-    height: 300px;
-    width: 600px;
-    background-color: red;
-    z-index: 9;
-
-  }
-
-  
-
-    .passport {
-    position: absolute;
-    border: solid rgb(255, 255, 0) 10px;
-  top: 250px;
-    left: 380px;
-    opacity: 0.1;
-    cursor: pointer;
-    height: 250px;
-    width: 500px;
-    background-color: red;
-    z-index: 9;
-
-  }
-
-  .image {
-    position: absolute;
-    border: solid rgb(255, 255, 0) 10px;
-  top: 270px;
-    left: 480px;
-    opacity: 0.1;
-    cursor: pointer;
-    height: 250px;
-    width: 250px;
-    background-color: red;
-    z-index: 9;
-
-  }
-  .signature {
-    position: absolute;
-    border: solid rgb(255, 255, 0) 10px;
-  top: 300px;
-    left: 380px;
-    opacity: 0.1;
-    cursor: pointer;
-    height: 250px;
-    width: 500px;
-    background-color: red;
-    z-index: 9;
-
-  }
-
-    .photo-popup {
-    position: absolute;
-  top: 300px;
-    left: 380px;
-    // opacity: 0.1;
-    // cursor: pointer;
-    // height: 450px;
-    // width: 500px;
-
-    z-index: 9;
-
-  }
-
-  
-
 .drop-down-select-button {
   width: 10px;
   top: -25px;
@@ -798,22 +700,6 @@ div.right-panel footer textarea {
   button {
     z-index: 1;
   }
-
-  //// Border
-
-
-  // #myDiv.fishnew {
-  //   position: absolute;
-  //   border: solid rgb(255, 255, 0) 10px;
-  //   top: 1000;
-  //   right: 380px;
-  //   opacity: 0.2;
-  //   cursor: pointer;
-  //   height: 400px;
-  //   width: 700px;
-  //   background-color: red;
-  //   z-index: 500;
-  // }
 
   select {
     border: none;

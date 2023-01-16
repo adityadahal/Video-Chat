@@ -107,6 +107,8 @@ export class Settings {
   img: string = AppConfig.settings.imgPath;
   leftPaneExpanded = true;
   rightPaneExpanded = false;
+  chatTabClicked = false;
+  rightPanelFormExpanded = false;
   expandIcon = true;
   sideBarFormLabels = [
     'Host',
