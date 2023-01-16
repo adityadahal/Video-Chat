@@ -9,7 +9,11 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { MatCardModule } from '@angular/material/card';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModule,
+  NgbModalConfig,
+  NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
