@@ -496,11 +496,11 @@
                     </div>
                   </div>
                   <footer
-                    *ngIf="imageVerify"
                     class="user-message-area"
                     style="padding: 6px 14px 14px 6px"
                   >
                     <button
+                      *ngIf="imageVerify"
                       (click)="DeleteImage()"
                       type="button"
                       mat-raised-button
