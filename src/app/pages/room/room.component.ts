@@ -31,6 +31,7 @@ export class RoomComponent
   selectedvalue: string = '';
   image: any = '';
   imageCaptured: boolean = false;
+  imageVerify: boolean = false;
 
   constructor(
     public router: Router,
@@ -275,7 +276,7 @@ export class RoomComponent
 
     let canvas = document.createElement('canvas');
 
-    canvas.width = 400;
+    canvas.width = 450;
     canvas.height = 300;
 
     // canvas.height = 350;
@@ -293,8 +294,7 @@ export class RoomComponent
   }
 
   DeleteImage() {
-    var gfg_down = document.getElementById('output');
-    gfg_down.parentNode.removeChild(gfg_down);
+    this.imageVerify = false;
   }
 
   async onRecord() {
@@ -309,6 +309,10 @@ export class RoomComponent
   }
   imageRetake() {
     this.selectedvalue = 'citizenship';
+    this.modalService.dismissAll();
+  }
+  verifyImage() {
+    this.imageVerify = true;
     this.modalService.dismissAll();
   }
 }

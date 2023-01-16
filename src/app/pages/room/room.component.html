@@ -17,7 +17,6 @@
 
   <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title"></h4>
       <button
         type="button"
         class="btn-close"
@@ -29,8 +28,8 @@
       <img [src]="image" alt="" />
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="c('Save click')">
-        Save
+      <button type="button" class="btn btn-primary" (click)="verifyImage()">
+        Verify Image
       </button>
       <button type="button" class="btn btn-danger" (click)="imageRetake()">
         Retake
@@ -488,15 +487,16 @@
                           selectedvalue
                         }}</span>
                       </p>
-                      <!-- <div
-                        id="output"
-                        class="text-center"
-                        style="height: 150px; width: 140px"
-                      ></div> -->
+                      <img
+                        [src]="image"
+                        alt=""
+                        *ngIf="imageVerify"
+                        style="width: 100%"
+                      />
                     </div>
                   </div>
                   <footer
-                    *ngIf="imageCaptured"
+                    *ngIf="imageVerify"
                     class="user-message-area"
                     style="padding: 6px 14px 14px 6px"
                   >
