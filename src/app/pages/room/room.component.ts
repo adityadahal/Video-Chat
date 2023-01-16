@@ -282,7 +282,7 @@ export class RoomComponent
     // canvas.height = 350;
     // canvas.width = 250;
     let ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 400, 200, 350, 200, 0, 0, 500, 300);
+    ctx.drawImage(video, 400, 200, 500, 300, 0, 0, 500, 300);
 
     this.downloadLink.nativeElement.href = canvas.toDataURL('image/jpeg');
     this.downloadLink.nativeElement.download = 'citizenship.jpeg';
@@ -309,11 +309,12 @@ export class RoomComponent
     this.selectedvalue = '';
   }
   imageRetake() {
+    this.imageVerify = false;
     this.selectedvalue = 'citizenship';
     this.modalService.dismissAll();
   }
   verifyImage() {
     this.imageVerify = true;
-    this.modalService.dismissAll();
+    // this.modalService.dismissAll();
   }
 }
