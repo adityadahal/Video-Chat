@@ -295,6 +295,7 @@ export class RoomComponent
 
   DeleteImage() {
     this.imageVerify = false;
+    this.selectedvalue = 'citizenship';
   }
 
   async onRecord() {
