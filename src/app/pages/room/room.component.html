@@ -14,6 +14,30 @@
         : ''
     "
   ></div>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"></h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="d('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <img [src]="image" alt="" />
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="c('Save click')">
+        Save
+      </button>
+      <button type="button" class="btn btn-danger" (click)="imageRetake()">
+        Retake
+      </button>
+    </div>
+  </ng-template>
+
   <div class="row">
     <!-- <div [class]="(leftPaneExpanded ? 'expanded' : 'collapsed') + ' col left-panel'">
       <aside class="text-white bg-dark inner">
@@ -453,7 +477,7 @@
                         mat-raised-button
                         color="primary"
                         style="width: 90%"
-                        (click)="captureShot()"
+                        (click)="open(content)"
                       >
                         Capture Image
                       </button>
@@ -464,15 +488,15 @@
                           selectedvalue
                         }}</span>
                       </p>
-                      <div
+                      <!-- <div
                         id="output"
                         class="text-center"
                         style="height: 150px; width: 140px"
-                      ></div>
+                      ></div> -->
                     </div>
                   </div>
                   <footer
-                    *ngIf="selectedvalue != ''"
+                    *ngIf="imageCaptured"
                     class="user-message-area"
                     style="padding: 6px 14px 14px 6px"
                   >
@@ -559,18 +583,11 @@
                       width="100%"
                       title="Iframe Example"
                     ></iframe>
-
-                    <!-- <div class="toast-container text-center" style="pointer-events: all; ">
-
-
-                    </div> -->
                   </div>
                   <footer
                     class="user-message-area"
                     style="padding: 6px 14px 14px 6px"
-                  >
-                    <!-- <button mat-raised-button color="primary" style="width: 100%;">Save</button> -->
-                  </footer>
+                  ></footer>
                 </div>
               </form>
             </ng-template>

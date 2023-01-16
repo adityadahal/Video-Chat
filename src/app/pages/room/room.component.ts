@@ -9,6 +9,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LokiImplementation } from './loki-implementation';
 import { VidyoConnector } from './vidyo-connector';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 declare var VidyoClientLib: any;
 
@@ -28,8 +29,14 @@ export class RoomComponent
 
   VCLib = VidyoClientLib;
   selectedvalue: string = '';
+  image: any = '';
+  imageCaptured: boolean = false;
 
-  constructor(public router: Router) {
+  constructor(
+    public router: Router,
+    config: NgbModalConfig,
+    private modalService: NgbModal
+  ) {
     super();
     this.rtr = router;
 
@@ -263,23 +270,26 @@ export class RoomComponent
     console.log(this.selectedvalue);
   }
   captureShot() {
-    console.log('clicked');
+    this.imageCaptured = true;
     let video: any = document.getElementsByTagName('video')[0];
 
     let canvas = document.createElement('canvas');
 
-    // canvas.width = 500;
-    // canvas.height = 300;
+    canvas.width = 400;
+    canvas.height = 300;
 
-    canvas.height = 350;
-    canvas.width = 250;
+    // canvas.height = 350;
+    // canvas.width = 250;
     let ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 200, 40, 350, 200, 0, 0, 500, 300);
+    ctx.drawImage(video, 400, 200, 350, 200, 0, 0, 500, 300);
 
     this.downloadLink.nativeElement.href = canvas.toDataURL('image/jpeg');
     this.downloadLink.nativeElement.download = 'citizenship.jpeg';
-    this.downloadLink.nativeElement.click();
-    document.getElementById('output').appendChild(canvas);
+    // this.downloadLink.nativeElement.click();
+
+    // document.getElementById('output').appendChild(canvas);
+    this.image = canvas.toDataURL('image/jpeg');
+    console.log(this.image);
   }
 
   DeleteImage() {
@@ -291,5 +301,14 @@ export class RoomComponent
     const mediaDevices = navigator.mediaDevices as any;
     const stream = await mediaDevices.getDisplayMedia();
     console.log(stream);
+  }
+  open(content) {
+    this.modalService.open(content);
+    this.captureShot();
+    this.selectedvalue = '';
+  }
+  imageRetake() {
+    this.selectedvalue = 'citizenship';
+    this.modalService.dismissAll();
   }
 }
