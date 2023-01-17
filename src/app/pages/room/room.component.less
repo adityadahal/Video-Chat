@@ -876,6 +876,60 @@ top: 144px;
   }
 }
 
+
+// Completed animation
+
+.done-check{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  // width: 100%;
+  left: 50px;
+  position: absolute;
+  z-index: 999;
+}
+
+svg {
+  width: 100%;
+}
+
+.tick {
+  transform-origin: center;
+  animation: grow 0.8s ease-in-out forwards;
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.circle {
+  transform-origin: center;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+  animation: dash 1s linear;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1000;
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
   
 
   

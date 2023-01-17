@@ -34,7 +34,9 @@ export class RoomComponent
   image: any = '';
   imageCaptured: boolean = false;
   imageVerify: boolean = false;
-  similar: string = '';
+  imageScan: boolean = false;
+  similar = 0;
+  orginalImage: string = '';
 
   constructor(
     public router: Router,
@@ -294,6 +296,7 @@ export class RoomComponent
 
     // document.getElementById('output').appendChild(canvas);
     this.image = canvas.toDataURL('image/jpeg');
+    this.orginalImage = canvas.toDataURL('image/jpeg');
   }
 
   dataURLtoBlob(dataurl) {
@@ -325,10 +328,20 @@ export class RoomComponent
   }
   imageRetake() {
     this.imageVerify = false;
+    this.imageScan = false;
+    this.similar = 0;
     this.selectedvalue = 'citizenship';
     this.modalService.dismissAll();
   }
+
+  saveSidebar() {
+    this.imageVerify = true;
+    this.similar = 0;
+    this.modalService.dismissAll();
+  }
   verifyImage() {
+    this.similar = 0; //initialiting Similar index
+    console.log(this.orginalImage);
     const byteCharacters = atob(this.image.split(',')[1]);
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
@@ -344,7 +357,7 @@ export class RoomComponent
       'https://visafoto.com/img/docs/ps_passport_35x45mm.jpg'
     );
 
-    this.imageVerify = true;
+    this.imageScan = true;
     this.httpClient
       .post(
         'https://coe.digiconnect.com.np/ai/api/v1/face/verification-url?facial_landmarks=false',
@@ -352,10 +365,12 @@ export class RoomComponent
       )
       .subscribe({
         next: (response: any) => (
-          (this.similar = response.similarity_score), (this.imageVerify = false)
+          (this.similar = response.similarity_score),
+          (this.imageScan = false),
+          (this.orginalImage = response.original_image)
         ),
         error: (error: any) => (
-          (this.similar = error), (this.imageVerify = false)
+          (this.similar = error), (this.imageScan = false)
         ),
       });
   }
