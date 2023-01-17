@@ -11,6 +11,8 @@ import { LokiImplementation } from './loki-implementation';
 import { VidyoConnector } from './vidyo-connector';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 declare var VidyoClientLib: any;
 
 @Component({
@@ -32,11 +34,13 @@ export class RoomComponent
   image: any = '';
   imageCaptured: boolean = false;
   imageVerify: boolean = false;
+  similar: string = '';
 
   constructor(
     public router: Router,
     config: NgbModalConfig,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private httpClient: HttpClient
   ) {
     super();
     this.rtr = router;
@@ -285,12 +289,23 @@ export class RoomComponent
     ctx.drawImage(video, 400, 200, 500, 300, 0, 0, 500, 300);
 
     this.downloadLink.nativeElement.href = canvas.toDataURL('image/jpeg');
-    this.downloadLink.nativeElement.download = 'citizenship.jpeg';
+    this.downloadLink.nativeElement.download = 'citizenship.png';
     // this.downloadLink.nativeElement.click();
 
     // document.getElementById('output').appendChild(canvas);
     this.image = canvas.toDataURL('image/jpeg');
-    console.log(this.image);
+  }
+
+  dataURLtoBlob(dataurl) {
+    var arr = dataurl.split(','),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: 'text/plain' });
   }
 
   DeleteImage() {
@@ -314,7 +329,61 @@ export class RoomComponent
     this.modalService.dismissAll();
   }
   verifyImage() {
+    const byteCharacters = atob(this.image.split(',')[1]);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+    const formData = new FormData();
+    formData.append('image', blob, 'image.jpeg');
+    formData.append(
+      'URL',
+      'https://visafoto.com/img/docs/ps_passport_35x45mm.jpg'
+    );
+
     this.imageVerify = true;
-    // this.modalService.dismissAll();
+
+    // let blob = this.dataURLtoBlob(this.image);
+
+    // let formData = new FormData();
+    // formData.append('image', blob, 'image.png');
+
+    // const headers = { 'content-Type': 'multipart/form-data' };
+    this.httpClient
+      .post(
+        'https://coe.digiconnect.com.np/ai/api/v1/face/verification-url?facial_landmarks=false',
+        formData
+      )
+      .subscribe({
+        next: (response: any) => (
+          (this.similar = response.similarity_score), (this.imageVerify = false)
+        ),
+        error: (error: any) => (
+          (this.similar = error), (this.imageVerify = false)
+        ),
+      });
+  }
+
+  uploadImage(base64Image: string) {
+    // const byteCharacters = atob(base64Image.split(',')[1]);
+    // const byteNumbers = new Array(byteCharacters.length);
+    // for (let i = 0; i < byteCharacters.length; i++) {
+    //   byteNumbers[i] = byteCharacters.charCodeAt(i);
+    // }
+    // const byteArray = new Uint8Array(byteNumbers);
+    // const blob = new Blob([byteArray], { type: 'image/jpeg' });
+    // const formData = new FormData();
+    // formData.append('image', blob, 'image.jpeg');
+    // this.http.post('your-api-endpoint', formData).subscribe(
+    //   (res) => {
+    //     console.log(res);
+    //   },
+    //   (err) => {
+    //     console.log(err);
+    //   }
+    // );
   }
 }
