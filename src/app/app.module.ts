@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { RoomComponent } from './pages/room/room.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClientComponent } from './client/client.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ClientComponent } from './client/client.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
