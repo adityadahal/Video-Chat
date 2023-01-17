@@ -345,13 +345,6 @@ export class RoomComponent
     );
 
     this.imageVerify = true;
-
-    // let blob = this.dataURLtoBlob(this.image);
-
-    // let formData = new FormData();
-    // formData.append('image', blob, 'image.png');
-
-    // const headers = { 'content-Type': 'multipart/form-data' };
     this.httpClient
       .post(
         'https://coe.digiconnect.com.np/ai/api/v1/face/verification-url?facial_landmarks=false',
@@ -365,25 +358,5 @@ export class RoomComponent
           (this.similar = error), (this.imageVerify = false)
         ),
       });
-  }
-
-  uploadImage(base64Image: string) {
-    // const byteCharacters = atob(base64Image.split(',')[1]);
-    // const byteNumbers = new Array(byteCharacters.length);
-    // for (let i = 0; i < byteCharacters.length; i++) {
-    //   byteNumbers[i] = byteCharacters.charCodeAt(i);
-    // }
-    // const byteArray = new Uint8Array(byteNumbers);
-    // const blob = new Blob([byteArray], { type: 'image/jpeg' });
-    // const formData = new FormData();
-    // formData.append('image', blob, 'image.jpeg');
-    // this.http.post('your-api-endpoint', formData).subscribe(
-    //   (res) => {
-    //     console.log(res);
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   }
-    // );
   }
 }
