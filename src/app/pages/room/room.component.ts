@@ -37,6 +37,7 @@ export class RoomComponent
   imageScan: boolean = false;
   similar = 0;
   orginalImage: string = '';
+  landMarkImage: string = '';
 
   constructor(
     public router: Router,
@@ -296,7 +297,7 @@ export class RoomComponent
 
     // document.getElementById('output').appendChild(canvas);
     this.image = canvas.toDataURL('image/jpeg');
-    this.orginalImage = canvas.toDataURL('image/jpeg');
+    console.log(this.image);
   }
 
   dataURLtoBlob(dataurl) {
@@ -354,20 +355,29 @@ export class RoomComponent
     formData.append('image', blob, 'image.jpeg');
     formData.append(
       'URL',
-      'https://visafoto.com/img/docs/ps_passport_35x45mm.jpg'
+      'https://upload.wikimedia.org/wikipedia/commons/3/31/My-Passport-Size%28Small-Beard%29-1MB.jpg'
     );
+
+    if (this.similar != 0 && this.similar < 10) {
+      alert('Please Retake the Image again');
+    }
+
+    console.log('Orginal Image', this.orginalImage);
 
     this.imageScan = true;
     this.httpClient
       .post(
-        'https://coe.digiconnect.com.np/ai/api/v1/face/verification-url?facial_landmarks=false',
+        'https://coe.digiconnect.com.np/ai/api/v1/face/verification-url?facial_landmarks=true',
         formData
       )
       .subscribe({
         next: (response: any) => (
           (this.similar = response.similarity_score),
           (this.imageScan = false),
-          (this.orginalImage = response.original_image)
+          (this.orginalImage =
+            'data:image/jpeg;base64,' + response.original_image),
+          (this.landMarkImage =
+            'data:image/jpeg;base64,' + response.landmark_image)
         ),
         error: (error: any) => (
           (this.similar = error), (this.imageScan = false)

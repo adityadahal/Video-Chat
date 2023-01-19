@@ -15,7 +15,12 @@
     "
   ></div>
 
-  <ng-template #content let-c="close" let-d="dismiss">
+  <ng-template
+    #content
+    let-c="close"
+    let-d="dismiss"
+    [class]="similar != 0 ? 'modal-expand' : ''"
+  >
     <div class="modal-header">
       <button
         type="button"
@@ -69,15 +74,55 @@
       <div *ngIf="similar != 0 && similar < 8" class="renlian">
         <p>UnSuccessful Click on Retake Again !!!!!!!!!</p>
       </div>
-      <img [src]="image" alt="" />
-    </div>
-    <div *ngIf="similar > 9">
-      <div class="row">
-        <div class="col-4">
-          <!-- <img [src]="image" alt="" /> -->
+      <div *ngIf="similar == 0">
+        <img [src]="image" alt="" />
+      </div>
+      <div *ngIf="similar !== 0">
+        <div class="row">
+          <div class="col-4">
+            <img [src]="landMarkImage" alt="" width="250px" height="200px" />
+          </div>
+          <div class="col-4">
+            <img
+              [src]="orginalImage"
+              alt=""
+              width="200px"
+              height="200px"
+              style="margin-left: 80px"
+            />
+          </div>
         </div>
-        <div class="col-4">
-          <img [src]="orginalImage" alt="" />
+        <div style="justify-content: center">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
