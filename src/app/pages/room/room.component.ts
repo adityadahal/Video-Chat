@@ -319,9 +319,10 @@ export class RoomComponent
   }
 
   async onRecord() {
-    const mediaDevices = navigator.mediaDevices as any;
-    const stream = await mediaDevices.getDisplayMedia();
-    console.log(stream);
+    // const mediaDevices = navigator.mediaDevices as any;
+    // const stream = await mediaDevices.getDisplayMedia();
+    // console.log(stream);
+    alert('Your Video is being Recorded');
   }
   open(content) {
     this.modalService.open(content);
