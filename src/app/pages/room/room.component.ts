@@ -35,6 +35,7 @@ export class RoomComponent
   imageCaptured: boolean = false;
   imageVerify: boolean = false;
   imageScan: boolean = false;
+  imageSave: boolean = false;
   similar = 0;
   orginalImage: string = '';
   landMarkImage: string = '';
@@ -329,6 +330,7 @@ export class RoomComponent
   }
   imageRetake() {
     this.imageVerify = false;
+    this.imageSave = false;
     this.imageScan = false;
     this.similar = 0;
     this.selectedvalue = 'citizenship';
@@ -336,9 +338,9 @@ export class RoomComponent
   }
 
   saveSidebar() {
+    this.imageSave = true;
     this.imageVerify = true;
     this.similar = 0;
-    this.modalService.dismissAll();
   }
   verifyImage() {
     this.similar = 0; //initialiting Similar index
