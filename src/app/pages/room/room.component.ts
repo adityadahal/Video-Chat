@@ -304,10 +304,16 @@ export class RoomComponent
 
   SaveBulkImages() {
     this.images = [...this.images, this.image];
+    this.modalService.dismissAll();
+    this.image = '';
+    this.similar = 0;
+    this.selectedvalue = 'citizenship';
     console.log(this.images);
   }
   DeleteBulkImages() {
     this.image = '';
+    this.imageVerify = false;
+    this.selectedvalue = 'citizenship';
   }
   dataURLtoBlob(dataurl) {
     var arr = dataurl.split(','),
@@ -322,8 +328,8 @@ export class RoomComponent
   }
 
   DeleteImage() {
+    this.images.pop();
     this.imageVerify = false;
-    this.selectedvalue = 'citizenship';
   }
 
   async onRecord() {
@@ -369,7 +375,7 @@ export class RoomComponent
       'https://upload.wikimedia.org/wikipedia/commons/3/31/My-Passport-Size%28Small-Beard%29-1MB.jpg'
     );
 
-    if (this.similar != 0 && this.similar < 10) {
+    if (this.similar != 0 && this.similar < 7) {
       alert('Please Retake the Image again');
     }
 
