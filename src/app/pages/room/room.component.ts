@@ -306,7 +306,9 @@ export class RoomComponent
     this.images = [...this.images, this.image];
     console.log(this.images);
   }
-
+  DeleteBulkImages() {
+    this.image = '';
+  }
   dataURLtoBlob(dataurl) {
     var arr = dataurl.split(','),
       mime = arr[0].match(/:(.*?);/)[1],
@@ -333,6 +335,7 @@ export class RoomComponent
   open(content: any) {
     this.modalService.open(content);
     this.captureShot();
+    this.imageSave = true;
     this.selectedvalue = '';
   }
   imageRetake() {
@@ -345,7 +348,6 @@ export class RoomComponent
   }
 
   saveSidebar() {
-    this.imageSave = true;
     this.imageVerify = true;
     this.similar = 0;
   }
