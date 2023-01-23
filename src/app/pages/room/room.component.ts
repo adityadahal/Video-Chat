@@ -32,6 +32,7 @@ export class RoomComponent
   VCLib = VidyoClientLib;
   selectedvalue: string = '';
   image: any = '';
+  images: any[] = [];
   imageCaptured: boolean = false;
   imageVerify: boolean = false;
   imageScan: boolean = false;
@@ -297,8 +298,13 @@ export class RoomComponent
     // this.downloadLink.nativeElement.click();
 
     // document.getElementById('output').appendChild(canvas);
+
     this.image = canvas.toDataURL('image/jpeg');
-    console.log(this.image);
+  }
+
+  SaveBulkImages() {
+    this.images = [...this.images, this.image];
+    console.log(this.images);
   }
 
   dataURLtoBlob(dataurl) {
@@ -324,7 +330,7 @@ export class RoomComponent
     // console.log(stream);
     alert('Your Video is being Recorded');
   }
-  open(content) {
+  open(content: any) {
     this.modalService.open(content);
     this.captureShot();
     this.selectedvalue = '';
