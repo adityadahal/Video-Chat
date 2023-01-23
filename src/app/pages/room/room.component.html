@@ -22,6 +22,7 @@
     [class]="similar != 0 ? 'modal-expand' : ''"
   >
     <div class="modal-header">
+      <!-- <h2 class="text-center">Result</h2> -->
       <button
         type="button"
         class="btn-close"
@@ -36,7 +37,7 @@
           <div class="bottom"></div>
         </div>
       </div>
-      <div *ngIf="similar > 8" class="done-check">
+      <!-- <div *ngIf="similar > 8" class="done-check">
         <div class="success-checkmark">
           <div class="check-icon">
             <span class="icon-line line-tip"></span>
@@ -45,7 +46,7 @@
             <div class="icon-fix"></div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div *ngIf="similar != 0 && similar < 8" class="renlian">
         <p>UnSuccessful Click on Retake Again !!!!!!!!!</p>
       </div>
@@ -571,14 +572,27 @@
                         [src]="image"
                         alt=""
                         *ngIf="imageVerify"
-                        style="width: 100%"
+                        style="width: 100%; height: 100px"
                       />
+                      <!-- <button
+                        *ngIf="image != ''"
+                        class="btn btn-primary"
+                        (click)="SaveBulkImages()"
+                      >
+                        Save
+                      </button> -->
                     </div>
                   </div>
                   <footer
                     class="user-message-area"
                     style="padding: 6px 14px 14px 6px"
                   >
+                    <!-- <div>
+                      <h2>Result</h2>
+                      <div *ngFor="let image of images">
+                        <img [src]="image" height="100px" width="100px" />
+                      </div>
+                    </div> -->
                     <button
                       *ngIf="imageVerify"
                       (click)="DeleteImage()"
