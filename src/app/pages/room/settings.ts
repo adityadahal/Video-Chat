@@ -132,9 +132,9 @@ export class Settings {
 
   sideBarForm: FormGroup = new FormGroup({});
   host: FormControl = new FormControl(
-    'https://laxmibank.staging.vidyoplatform.io'
+    'https://yourhost@host.com'
   );
-  roomKey: FormControl = new FormControl('azK9WImW12');
+  roomKey: FormControl = new FormControl('id');
   displayName: FormControl = new FormControl('Guest');
   loggerUrl: FormControl = new FormControl();
   roomPin: FormControl = new FormControl('706674');
